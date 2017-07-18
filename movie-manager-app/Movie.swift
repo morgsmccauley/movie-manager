@@ -11,6 +11,12 @@ import Foundation
 class Movie {
  
     let title: String;
+    //let id: Int;
+    //genre
+    //overview
+    //release date
+    //image - use delegate?
+    //rating
     
     init(title: String) {
         self.title = title;

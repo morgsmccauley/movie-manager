@@ -27,8 +27,12 @@ class MovieManager {
             return;
         }
         
+        
         //check and make sure its on right queue
         var _ =  URLSession.shared.dataTask(with: searchURL) { (data, Response, error) in
+            
+            print("movie manager");
+            print(Thread.isMainThread);
             
             //throw on error
             let jsonResponse = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: AnyObject];
@@ -38,7 +42,7 @@ class MovieManager {
             for movie in rawMovieSearch {
                 
                 let movieTitle = movie["title"] as! String;
-                print(movieTitle);
+//                print(movieTitle);
                 matchedMovies.append(Movie(title: movieTitle));
             }
             
