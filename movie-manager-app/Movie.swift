@@ -7,10 +7,18 @@
 //
 
 import Foundation
+import UIKit
+
+protocol MoviePosterDelegate {
+    
+    func fetchMoviePosterWith(posterPath: String, completionHandler: @escaping ((UIImage?) -> ()));
+}
 
 class Movie {
  
     let title: String;
+    let posterPath: String;
+//    var poster: UIImage? = nil;
     //let id: Int;
     //genre
     //overview
@@ -18,7 +26,11 @@ class Movie {
     //image - use delegate?
     //rating
     
-    init(title: String) {
+    var moviePosterDelegate: MoviePosterDelegate?
+    
+    init(title: String, posterPath: String, moviePosterDelegate: MoviePosterDelegate?) {
         self.title = title;
+        self.posterPath = posterPath;
+        self.moviePosterDelegate = moviePosterDelegate;
     }
 }

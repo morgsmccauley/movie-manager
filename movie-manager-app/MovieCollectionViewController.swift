@@ -12,7 +12,6 @@ private let reuseIdentifier = "MovieCell"
 
 class MovieCollectionViewController: UICollectionViewController {
     
-    
     private var movieResults: [Movie] = [];
     
     let movieManager = MovieManager();
@@ -30,77 +29,38 @@ class MovieCollectionViewController: UICollectionViewController {
     
     //make sure tasks are dispatched on correct queues
     func searchForMovies() {
-        
         print("search for movies");
-//        self.collectionView!.reloadData();
         
         movieManager.fetchMovies(withTitle: searchText!) { movieResults in
-            
+            //dont force unwrap
             self.movieResults = movieResults!;
-//            self.tableView.reloadData();
-            
-            
             self.collectionView!.reloadData();
         }
     }
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        searchText = "Jurassic";
-//    }
 
     override func viewDidLoad() {
         print("view did load")
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-//        self.collectionView!.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
         
         searchText = "Jurassic";
     }
 
-
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return movieResults.count;
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("cell for row at");
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCollectionViewCell
-        
-        cell.backgroundColor = UIColor.gray
-        
-//        cell.movieTitle = UILabel();
-        
-        print(cell);
-        
-        
     
-        
-//        print(cell.movieTitle.text);
+        cell.moviePoster.image = nil;
         cell.movieTitle.text? = movieResults[indexPath.row].title;
-        
-
-
-    
-        // Configure the cell
+        cell.moviePosterDelegate = movieResults[indexPath.row].moviePosterDelegate;
+        cell.posterPath = movieResults[indexPath.row].posterPath;
     
         return cell
     }
-
-
 }

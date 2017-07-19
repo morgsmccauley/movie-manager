@@ -10,8 +10,30 @@ import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
     
+    var posterPath: String = "" {
+        didSet {
+            updatePoster();
+        }
+    }
+    
+    var moviePosterDelegate: MoviePosterDelegate?;
+    
     @IBOutlet weak var movieTitle: UILabel!
+    @IBOutlet weak var moviePoster: UIImageView!
     
     
-    
+    func updatePoster() {
+        print("update poster");
+        
+        //start loading
+        
+        moviePosterDelegate?.fetchMoviePosterWith(posterPath: posterPath) { moviePoster in
+            print(moviePoster);
+            self.moviePoster.image = moviePoster;
+        }
+        
+        //set no image
+        
+        //end loading
+    }
 }
