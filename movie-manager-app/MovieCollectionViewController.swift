@@ -34,7 +34,9 @@ class MovieCollectionViewController: UICollectionViewController {
         movieManager.fetchMovies(withTitle: searchText!) { movieResults in
             //dont force unwrap
             self.movieResults = movieResults!;
-            self.collectionView!.reloadData();
+            DispatchQueue.main.async {
+                self.collectionView!.reloadData();
+            }
         }
     }
 

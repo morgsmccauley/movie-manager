@@ -32,7 +32,10 @@ class MovieCollectionViewCell: UICollectionViewCell {
             moviePosterDelegate?.fetchMoviePosterWith(posterPath: posterPath) { [weak self] returnedMoviePoster in
                 if let moviePoster = returnedMoviePoster {
                     self?.cache.setObject(moviePoster, forKey: self?.posterPath as AnyObject)
-                    self?.moviePoster.image = moviePoster;
+                    
+                    DispatchQueue.main.async {
+                        self?.moviePoster.image = moviePoster;
+                    }
                 }
             }
             //set no image
