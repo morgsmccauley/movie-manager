@@ -56,6 +56,7 @@ class MovieCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCollectionViewCell
     
+        //pass movie to cell - including delegate?
         cell.moviePoster.image = nil;
         cell.movieTitle.text? = movieResults[indexPath.row].title;
         cell.moviePosterDelegate = movieResults[indexPath.row].moviePosterDelegate;

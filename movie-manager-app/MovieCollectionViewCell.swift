@@ -10,6 +10,9 @@ import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var movieTitle: UILabel!
+    @IBOutlet weak var moviePoster: UIImageView!
+    
     var posterPath: String = "" {
         didSet {
             updatePoster();
@@ -17,22 +20,23 @@ class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     var moviePosterDelegate: MoviePosterDelegate?;
-    
-    @IBOutlet weak var movieTitle: UILabel!
-    @IBOutlet weak var moviePoster: UIImageView!
-    
+    var cache = NSCache<AnyObject, AnyObject>();
     
     func updatePoster() {
-        print("update poster");
-        
         //start loading
         
-        moviePosterDelegate?.fetchMoviePosterWith(posterPath: posterPath) { moviePoster in
-            print(moviePoster);
-            self.moviePoster.image = moviePoster;
+        if let cachedMoviePoster = cache.object(forKey: posterPath as AnyObject) as? UIImage {
+            print("displaying cached image");
+            self.moviePoster.image = cachedMoviePoster;
+        } else {
+            moviePosterDelegate?.fetchMoviePosterWith(posterPath: posterPath) { [weak self] returnedMoviePoster in
+                if let moviePoster = returnedMoviePoster {
+                    self?.cache.setObject(moviePoster, forKey: self?.posterPath as AnyObject)
+                    self?.moviePoster.image = moviePoster;
+                }
+            }
+            //set no image
         }
-        
-        //set no image
         
         //end loading
     }
