@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "movie-manager-app/MovieCollectionViewCell.swift"
-            timestampString = "522466082.639325"
+            timestampString = "522469483.180718"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "updatePoster()"
             landmarkType = "7">
          </BreakpointContent>

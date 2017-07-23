@@ -62,6 +62,7 @@ class MovieManager: MoviePosterDelegate {
             if let image = UIImage(data: data!) {
                 completionHandler(image);
             } else {
+                print("no image");
                 completionHandler(nil);
             }
         }.resume();

@@ -46,12 +46,20 @@
                                             <rect key="frame" x="84" y="108" width="20" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </activityIndicatorView>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Image not found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0y-t2-Qvl">
+                                            <rect key="frame" x="31" y="98" width="125" height="41"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </view>
                                 <connections>
                                     <outlet property="activityIndicator" destination="VhF-2u-n8S" id="Ljb-ow-8hT"/>
                                     <outlet property="moviePoster" destination="xwS-pM-59o" id="wnc-Pq-SLl"/>
                                     <outlet property="movieTitle" destination="6zF-CQ-QCO" id="yDb-6h-zfz"/>
+                                    <outlet property="noImageLabel" destination="Y0y-t2-Qvl" id="fu6-ks-4BJ"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
