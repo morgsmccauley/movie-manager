@@ -50,8 +50,6 @@ class MovieManager: MoviePosterDelegate {
     
     func fetchMoviePosterWith(posterPath: String, completionHandler: @escaping ((UIImage?) -> ())) {
         
-        print("fetch poster");
-        
         let posterRequestString = "https://image.tmdb.org/t/p/w500\(posterPath)";
         
         guard let posterRequestUrl = URL(string: posterRequestString) else {
@@ -60,8 +58,6 @@ class MovieManager: MoviePosterDelegate {
         }
         
         var _ = URLSession.shared.dataTask(with: posterRequestUrl) { (data, response, error) in
-            print("poster task");
-            
             //dont force unwrap data?
             if let image = UIImage(data: data!) {
                 completionHandler(image);

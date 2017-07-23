@@ -13,22 +13,22 @@
         <scene sceneID="6uM-o8-Apz">
             <objects>
                 <collectionViewController id="8hc-ER-dlA" customClass="MovieCollectionViewController" customModule="movie_manager_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="mQ8-lC-gLR">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" dataMode="prototypes" id="mQ8-lC-gLR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y5W-CJ-LRA">
-                            <size key="itemSize" width="170" height="236"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="itemSize" width="188" height="236"/>
+                            <size key="headerReferenceSize" width="50" height="66"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="mq6-Lx-jxQ" customClass="MovieCollectionViewCell" customModule="movie_manager_app" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="170" height="236"/>
+                                <rect key="frame" x="93.5" y="66" width="188" height="236"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="170" height="236"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="188" height="236"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="text label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zF-CQ-QCO">
@@ -39,17 +39,33 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xwS-pM-59o">
-                                            <rect key="frame" x="0.0" y="0.0" width="170" height="187"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="188" height="187"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VhF-2u-n8S">
+                                            <rect key="frame" x="84" y="108" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                 </view>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="VhF-2u-n8S" id="Ljb-ow-8hT"/>
                                     <outlet property="moviePoster" destination="xwS-pM-59o" id="wnc-Pq-SLl"/>
                                     <outlet property="movieTitle" destination="6zF-CQ-QCO" id="yDb-6h-zfz"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Xms-Ns-N4r">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2n4-VW-fry">
+                                    <rect key="frame" x="0.0" y="22" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                            </subviews>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="8hc-ER-dlA" id="LGM-LQ-aLL"/>
                             <outlet property="delegate" destination="8hc-ER-dlA" id="1wB-0A-MNV"/>
@@ -58,7 +74,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pxY-mi-CCY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="372" y="303.59820089955025"/>
+            <point key="canvasLocation" x="352.80000000000001" y="320.68965517241384"/>
         </scene>
     </scenes>
 </document>
