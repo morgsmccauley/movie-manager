@@ -15,6 +15,9 @@ class MovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var noImageLabel: UILabel!
     
+    var imageWidth: Int = 0;
+    var imageHeight: Int = 0;
+    
     var posterPath: String = "" {
         didSet {
             updatePoster();
@@ -35,27 +38,25 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         if let cachedMoviePoster = cache.object(forKey: posterPath as AnyObject) as? UIImage {
             
-            print("displaying cached image for \(self.movieTitle.text)");
+            print("displaying cached image for \(String(describing: self.movieTitle.text))");
             self.moviePoster.image = cachedMoviePoster;
             activityIndicator.stopAnimating();
         } else {
             moviePosterDelegate?.fetchMoviePosterWith(posterPath: posterPath) { [weak self] returnedMoviePoster in
                 
-                print("fethcing movie poster for \(self?.movieTitle.text)");
+                print("fethcing movie poster for \(String(describing: self?.movieTitle.text))");
                 
-                if let moviePoster = returnedMoviePoster {
+                DispatchQueue.main.async {
+                    if let moviePoster = returnedMoviePoster {
                     
-                    DispatchQueue.main.async {
                         self?.activityIndicator.stopAnimating();
                         self?.cache.setObject(moviePoster, forKey: self?.posterPath as AnyObject);
                         self?.moviePoster.image = moviePoster;
+                    } else {
+                        self?.setNoImage();
                     }
-                } else {
-                    print("no image");
-                    self?.setNoImage();
                 }
             }
-            //set no image
         }
     }
     

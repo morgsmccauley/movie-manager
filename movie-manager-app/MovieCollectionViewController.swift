@@ -12,22 +12,18 @@ private let reuseIdentifier = "MovieCell"
 
 class MovieCollectionViewController: UICollectionViewController {
     
-    private var movieResults: [Movie] = [];
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
-    let movieManager = MovieManager();
+    private var movieResults: [Movie] = [];
+    private let movieManager = MovieManager();
     
     var searchText: String? {
         
         didSet {
-            //remove all movie results
-            //reload table view
-            
             searchForMovies();
-            //set the title as the search string
         }
     }
     
-    //make sure tasks are dispatched on correct queues
     func searchForMovies() {
         print("search for movies");
         
@@ -41,21 +37,34 @@ class MovieCollectionViewController: UICollectionViewController {
     }
 
     override func viewDidLoad() {
-        print("view did load")
-        super.viewDidLoad()
+        print("view did load");
+        super.viewDidLoad();
+        
+        let space: CGFloat = 0.0;
+        let xDimension = (self.view.frame.size.width) / 3;
+        let yDimension = xDimension * 1.2;
+        
+        flowLayout.minimumLineSpacing = space;
+        flowLayout.minimumInteritemSpacing = space;
+        flowLayout.itemSize = CGSize.init(width: xDimension, height: yDimension);
         
         searchText = "Jurassic";
+        
+        
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
         return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return movieResults.count;
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCollectionViewCell
         
         print("cell for \(movieResults[indexPath.row].title)");
