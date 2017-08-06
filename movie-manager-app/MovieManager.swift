@@ -18,8 +18,15 @@ class MovieManager: MoviePosterDelegate {
     func fetchMovies(withTitle title: String, movieHandler: @escaping (([Movie]?) -> ())){
         var matchedMovies: [Movie] = [];
         
+        guard let escapedTitle = title.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
+            movieHandler(nil);
+            return;
+        }
+        
+        print(escapedTitle)
+        
         //need to encode title, need to return if it is not possible to
-        let searchRequest = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&query=\(title)&page=1&include_adult=false";
+        let searchRequest = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&query=\(escapedTitle)&page=1&include_adult=false";
         
         //let defaultSession = URLSession(configuration: URLSessionConfiguration.default);
         guard let movieSearchURL = URL(string: searchRequest) else {

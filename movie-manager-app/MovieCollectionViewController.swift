@@ -48,7 +48,7 @@ class MovieCollectionViewController: UICollectionViewController {
         flowLayout.minimumInteritemSpacing = space;
         flowLayout.itemSize = CGSize.init(width: xDimension, height: yDimension);
         
-        searchText = "Jurassic";
+        searchText = "star wars";
         
         
     }
