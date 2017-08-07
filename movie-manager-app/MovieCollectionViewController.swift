@@ -10,9 +10,11 @@ import UIKit
 
 private let reuseIdentifier = "MovieCell"
 
-class MovieCollectionViewController: UICollectionViewController {
+class MovieCollectionViewController: UICollectionViewController, UISearchBarDelegate {
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    
+    var searchController : UISearchController!
     
     private var movieResults: [Movie] = [];
     private let movieManager = MovieManager();
@@ -25,8 +27,7 @@ class MovieCollectionViewController: UICollectionViewController {
     }
     
     func searchForMovies() {
-        print("search for movies");
-        
+
         movieManager.fetchMovies(withTitle: searchText!) { movieResults in
             //dont force unwrap
             self.movieResults = movieResults!;
@@ -37,20 +38,12 @@ class MovieCollectionViewController: UICollectionViewController {
     }
 
     override func viewDidLoad() {
-        print("view did load");
+        
         super.viewDidLoad();
         
-        let space: CGFloat = 0.0;
-        let xDimension = (self.view.frame.size.width) / 3;
-        let yDimension = xDimension * 1.2;
-        
-        flowLayout.minimumLineSpacing = space;
-        flowLayout.minimumInteritemSpacing = space;
-        flowLayout.itemSize = CGSize.init(width: xDimension, height: yDimension);
+        setUpFlowLayout();
         
         searchText = "star wars";
-        
-        
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -66,8 +59,6 @@ class MovieCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCollectionViewCell
-        
-        print("cell for \(movieResults[indexPath.row].title)");
     
         //pass movie to cell - including delegate?
         cell.moviePoster.image = nil;
@@ -76,5 +67,41 @@ class MovieCollectionViewController: UICollectionViewController {
         cell.posterPath = movieResults[indexPath.row].posterPath;
     
         return cell
+    }
+    
+    func setUpFlowLayout() {
+        let space: CGFloat = 0.0;
+        let xDimension = (self.view.frame.size.width) / 3;
+        let yDimension = xDimension * 1.5;
+        
+        flowLayout.minimumLineSpacing = space;
+        flowLayout.minimumInteritemSpacing = space;
+        flowLayout.itemSize = CGSize.init(width: xDimension, height: yDimension);
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if (kind == UICollectionElementKindSectionHeader) {
+            let headerView:UICollectionReusableView =  collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CollectionViewHeader", for: indexPath)
+            
+            return headerView
+        }
+        
+        return UICollectionReusableView();
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        if(!(searchBar.text?.isEmpty)!){
+            searchText = searchBar.text!
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if(searchText.isEmpty){
+            print("search changed");
+            //reload your data source if necessary
+//            self.collectionView?.reloadData()
+        }
     }
 }

@@ -23,18 +23,14 @@ class MovieManager: MoviePosterDelegate {
             return;
         }
         
-        print(escapedTitle)
-        
-        //need to encode title, need to return if it is not possible to
+        //when bottom is reached query page 2 and append to original array
         let searchRequest = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&query=\(escapedTitle)&page=1&include_adult=false";
         
-        //let defaultSession = URLSession(configuration: URLSessionConfiguration.default);
         guard let movieSearchURL = URL(string: searchRequest) else {
             movieHandler(nil);
             return;
         }
         
-        //check and make sure its on right queue
         var _ =  URLSession.shared.dataTask(with: movieSearchURL) { (data, response, error) in
             //throw on error
             let jsonResponse = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: AnyObject];
@@ -65,11 +61,10 @@ class MovieManager: MoviePosterDelegate {
         }
         
         var _ = URLSession.shared.dataTask(with: posterRequestUrl) { (data, response, error) in
-            //dont force unwrap data?
+
             if let image = UIImage(data: data!) {
                 completionHandler(image);
             } else {
-                print("no image");
                 completionHandler(nil);
             }
         }.resume();

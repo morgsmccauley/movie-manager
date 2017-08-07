@@ -38,13 +38,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
         if let cachedMoviePoster = cache.object(forKey: posterPath as AnyObject) as? UIImage {
             
-            print("displaying cached image for \(String(describing: self.movieTitle.text))");
             self.moviePoster.image = cachedMoviePoster;
             activityIndicator.stopAnimating();
         } else {
+            
             moviePosterDelegate?.fetchMoviePosterWith(posterPath: posterPath) { [weak self] returnedMoviePoster in
-                
-                print("fethcing movie poster for \(String(describing: self?.movieTitle.text))");
                 
                 DispatchQueue.main.async {
                     if let moviePoster = returnedMoviePoster {
