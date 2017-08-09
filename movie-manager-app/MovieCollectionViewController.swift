@@ -104,4 +104,17 @@ class MovieCollectionViewController: UICollectionViewController, UISearchBarDele
 //            self.collectionView?.reloadData()
         }
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard segue.identifier == "MovieViewSegue" else { return; }
+            
+        if let cell = sender as? MovieCollectionViewCell,
+            let indexPath = self.collectionView!.indexPath(for: cell),
+             let destination = segue.destination as? MovieViewController {
+            
+            destination.movie = movieResults[(indexPath as NSIndexPath).row];
+        }
+    }
 }
