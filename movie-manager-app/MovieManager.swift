@@ -14,6 +14,25 @@ class MovieManager: MoviePosterDelegate {
     
     private let apiKey = "e2ee42fbd9d45fd431771c42d0bda8cd";
     
+//    private let searchMap: [String: String] = [
+//        "popular" : "https://api.themoviedb.org/3/movie/popular?api_key=<<apiKey>>&language=en-US&page=<<page>>",
+//        "movie" : "https://api.themoviedb.org/3/search/movie?api_key=<<apiKey>>&language=en-US&query=<<query>>&page=<<page>>&include_adult=false",
+//        "multiSearch" : "https://api.themoviedb.org/3/search/multi?api_key=<<api_key>>&language=en-US&query=<<query>>&page=<<page>>&include_adult=false"
+//    ];
+//    
+//    func fetch() {
+//        
+//    }
+//    
+//    func fetchMovieSearchResults() {
+//        
+//    }
+//    
+//    func fetchPopularMovies() {
+//        
+//        var _ = searchMap["popular"]?.replacingOccurrences(of: "<<>>", with: "");
+//    }
+    
     //return errors to handler - should it be option array or optional items in array
     func fetchMovies(withTitle title: String, movieHandler: @escaping (([Movie]?) -> ())){
         var matchedMovies: [Movie] = [];

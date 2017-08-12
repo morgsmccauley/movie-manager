@@ -71,12 +71,16 @@ class MovieCollectionViewController: UICollectionViewController, UISearchBarDele
     
     func setUpFlowLayout() {
         let space: CGFloat = 0.0;
+        
         let xDimension = (self.view.frame.size.width) / 3;
         let yDimension = xDimension * 1.5;
         
         flowLayout.minimumLineSpacing = space;
         flowLayout.minimumInteritemSpacing = space;
         flowLayout.itemSize = CGSize.init(width: xDimension, height: yDimension);
+        
+        let offset = CGPoint.init(x: 0, y: 44);
+        self.collectionView?.contentOffset = offset;
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

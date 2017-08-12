@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "movie-manager-app/MovieManager.swift"
-            timestampString = "523710033.745693"
+            timestampString = "524203758.655181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "fetchMovies(withTitle:movieHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "movie-manager-app/MovieCollectionViewController.swift"
-            timestampString = "523961641.940587"
+            timestampString = "524203789.945941"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
