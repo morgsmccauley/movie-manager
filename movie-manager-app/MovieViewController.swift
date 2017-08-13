@@ -9,6 +9,10 @@
 import UIKit
 
 class MovieViewController: UIViewController {
+  
+    @IBOutlet weak var moviePoster: UIImageView!
+    @IBOutlet weak var movieTitle: UILabel!
+    @IBOutlet weak var moviePlot: UITextField!
     
     var movie: Movie? {
         didSet {
@@ -20,6 +24,13 @@ class MovieViewController: UIViewController {
         print("set up view");
         
         self.title = movie?.title;
+        
+        if let poster = movie?.poster {
+            
+//            self.moviePoster.image = poster;
+        }
+        
+//        movieTitle.text = movie?.title;
     }
 
 }

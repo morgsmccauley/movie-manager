@@ -60,9 +60,9 @@ class MovieManager: MoviePosterDelegate {
                 let title = movie["title"] as! String;
                 
                 if let posterPath = movie["poster_path"] as? String {
-                    matchedMovies.append(Movie(title: title, posterPath: posterPath, moviePosterDelegate: self));
+                    matchedMovies.append(Movie(title: title, posterPath: posterPath));
                 } else {
-                    matchedMovies.append(Movie(title: title, posterPath: "", moviePosterDelegate: nil));
+                    matchedMovies.append(Movie(title: title, posterPath: ""));
                 }
             }
             
@@ -70,9 +70,9 @@ class MovieManager: MoviePosterDelegate {
         }.resume();
     }
     
-    func fetchMoviePosterWith(posterPath: String, completionHandler: @escaping ((UIImage?) -> ())) {
+    func fetchPosterFrom(path: String, completionHandler: @escaping ((UIImage?) -> ())) {
         
-        let posterRequestString = "https://image.tmdb.org/t/p/w500\(posterPath)";
+        let posterRequestString = "https://image.tmdb.org/t/p/w500\(path)";
         
         guard let posterRequestUrl = URL(string: posterRequestString) else {
             completionHandler(nil);
