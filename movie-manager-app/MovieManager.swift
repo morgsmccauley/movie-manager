@@ -9,83 +9,98 @@
 import Foundation
 import UIKit
 
+protocol MovieManagerDelegate {
+    
+    func movieFetchComplete(movies: [Movie]);
+    func imageFetchComplete(image: UIImage)
+}
+
+private let apiKey = "e2ee42fbd9d45fd431771c42d0bda8cd";
 
 class MovieManager: MoviePosterDelegate {
     
-    private let apiKey = "e2ee42fbd9d45fd431771c42d0bda8cd";
+    var delegate: MovieManagerDelegate?;
+    var imageFetchCallback: ((_ image: UIImage, _ cellIndexPath: IndexPath) -> Void)?;
     
-//    private let searchMap: [String: String] = [
-//        "popular" : "https://api.themoviedb.org/3/movie/popular?api_key=<<apiKey>>&language=en-US&page=<<page>>",
-//        "movie" : "https://api.themoviedb.org/3/search/movie?api_key=<<apiKey>>&language=en-US&query=<<query>>&page=<<page>>&include_adult=false",
-//        "multiSearch" : "https://api.themoviedb.org/3/search/multi?api_key=<<api_key>>&language=en-US&query=<<query>>&page=<<page>>&include_adult=false"
-//    ];
-//    
-//    func fetch() {
-//        
-//    }
-//    
-//    func fetchMovieSearchResults() {
-//        
-//    }
-//    
-//    func fetchPopularMovies() {
-//        
-//        var _ = searchMap["popular"]?.replacingOccurrences(of: "<<>>", with: "");
-//    }
-    
-    //return errors to handler - should it be option array or optional items in array
-    func fetchMovies(withTitle title: String, movieHandler: @escaping (([Movie]?) -> ())){
-        var matchedMovies: [Movie] = [];
+    func fetchPopularMovies() {
         
-        guard let escapedTitle = title.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
-            movieHandler(nil);
-            return;
-        }
-        
-        //when bottom is reached query page 2 and append to original array
-        let searchRequest = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&query=\(escapedTitle)&page=1&include_adult=false";
-        
-        guard let movieSearchURL = URL(string: searchRequest) else {
-            movieHandler(nil);
-            return;
-        }
-        
-        var _ =  URLSession.shared.dataTask(with: movieSearchURL) { (data, response, error) in
-            //throw on error
-            let jsonResponse = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: AnyObject];
-            
-            let rawMovieSearch = jsonResponse!["results"] as! [[String: AnyObject]];
-            
-            for movie in rawMovieSearch {
-                let title = movie["title"] as! String;
-                
-                if let posterPath = movie["poster_path"] as? String {
-                    matchedMovies.append(Movie(title: title, posterPath: posterPath));
-                } else {
-                    matchedMovies.append(Movie(title: title, posterPath: ""));
-                }
-            }
-            
-            movieHandler(matchedMovies);
-        }.resume();
+        let popularRequestEndpoint = "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)&language=en-US&page=1";
+        makeMovieRequest(with: popularRequestEndpoint);
     }
     
-    func fetchPosterFrom(path: String, completionHandler: @escaping ((UIImage?) -> ())) {
-        
-        let posterRequestString = "https://image.tmdb.org/t/p/w500\(path)";
-        
-        guard let posterRequestUrl = URL(string: posterRequestString) else {
-            completionHandler(nil);
+    func fetchMoviesFor(query: String) {
+
+        guard let escapedQuery = query.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
+            print("ERROR: Cannot escape query for movie search");
             return;
         }
         
-        var _ = URLSession.shared.dataTask(with: posterRequestUrl) { (data, response, error) in
-
-            if let image = UIImage(data: data!) {
-                completionHandler(image);
-            } else {
-                completionHandler(nil);
+        let movieSearchEndpoint = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&query=\(escapedQuery)&page=1&include_adult=false";
+        makeMovieRequest(with: movieSearchEndpoint);
+    }
+    
+    func fetchmultiSearchFor(query: String) {
+        
+        guard let escapedQuery = query.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
+            print("ERROR: Cannot escape query for multi search");
+            return;
+        }
+        
+        let multiSearchEndpoint = "https://api.themoviedb.org/3/search/multi?api_key=\(apiKey)&language=en-US&query=\(escapedQuery)&page=1&include_adult=false";
+        makeMovieRequest(with: multiSearchEndpoint);
+    }
+    
+    private func makeMovieRequest(with endpoint: String) {
+        
+        //should be able to trust url
+        guard let endpointUrl = URL(string: endpoint) else {
+            print("ERROR: cannot convert endpoint to url");
+            return;
+        }
+        
+        let task =  URLSession.shared.dataTask(with: endpointUrl) { [weak self] (data, response, error) in
+            
+            guard let jsonResponse = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: AnyObject],
+                  let movieJson = jsonResponse["results"] as? [[String: AnyObject]] else {
+                    print("ERROR: could not covert response to JSON");
+                    return;
             }
-        }.resume();
+            
+            let parsedMovies = self?.getMoviesFrom(json: movieJson);
+            
+            self?.delegate?.movieFetchComplete(movies: parsedMovies!);
+        }
+        task.resume();
+    }
+    
+    private func getMoviesFrom(json movieJson: [[String: AnyObject]]) -> [Movie] {
+        
+        var movies: [Movie] = [];
+        
+        for movie in movieJson {
+            
+            let title = movie["title"] as! String;
+            let posterPath = movie["poster_path"] as? String ?? "";
+            
+            movies.append(Movie(title: title, posterPath: posterPath));
+        }
+        
+        return movies;
+    }
+    
+    func fetchImage(path: String, completionHandler: @escaping ((UIImage?) -> ())) {
+        
+        let imageEndpoint = "https://image.tmdb.org/t/p/w500\(path)";
+        
+        guard let endpointUrl = URL(string: imageEndpoint) else {
+            return;
+        }
+        
+        let task = URLSession.shared.dataTask(with: endpointUrl) { (data, response, error) in
+            
+            let image = UIImage(data: data!)
+            completionHandler(image)
+        }
+        task.resume();
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 
 protocol MoviePosterDelegate {
     
-    func fetchPosterFrom(path: String, completionHandler: @escaping ((UIImage?) -> ()));
+//    func fetchPosterFrom(path: String, completionHandler: @escaping ((UIImage?) -> ()));
 }
 
 class Movie {

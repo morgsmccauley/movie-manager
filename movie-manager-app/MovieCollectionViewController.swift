@@ -12,27 +12,33 @@ private let reuseIdentifier = "MovieCell"
 
 class MovieCollectionViewController: UICollectionViewController {
     
-    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!;
     
-    var searchController : UISearchController!
-    
-    var movieResults: [Movie] = [];
+    var searchController : UISearchController!;
     let movieManager = MovieManager();
     
+    var movieResults: [Movie] = [] {
+        
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView!.reloadData();
+            }
+        }
+    };
     var searchText: String? {
         
         didSet {
             searchForMovies();
         }
-    }
+    };
     
     override func viewDidLoad() {
         
         super.viewDidLoad();
         
+        movieManager.delegate = self;
         setUpLayout();
-        
-        searchText = "star wars";
+        movieManager.fetchPopularMovies();
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -51,12 +57,12 @@ class MovieCollectionViewController: UICollectionViewController {
     
         cell.setUpView();
         cell.movieTitle.text? = movieResults[indexPath.row].title;
-
-//        fetchPosterFor(&cell, at: indexPath.row);
         
         let posterPath = movieResults[indexPath.row].posterPath;
-        movieManager.fetchPosterFrom(path: posterPath) { returnedMoviePoster in
-         
+        
+        
+        movieManager.fetchImage(path: posterPath) { returnedMoviePoster in
+
             DispatchQueue.main.async {
                 
                 if let poster = returnedMoviePoster {
@@ -85,59 +91,28 @@ class MovieCollectionViewController: UICollectionViewController {
     }
 }
 
-extension MovieCollectionViewController {
+/*
+ *  Interact with model
+ */
+extension MovieCollectionViewController: MovieManagerDelegate {
+    
+    func movieFetchComplete(movies: [Movie]) {
+        self.movieResults = movies;
+    }
+    
+    func imageFetchComplete(image: UIImage) {
+        
+    }
     
     func searchForMovies() {
         
-        movieManager.fetchMovies(withTitle: searchText!) { movieResults in
-            //dont force unwrap
-            self.movieResults = movieResults!;
-            DispatchQueue.main.async {
-                self.collectionView!.reloadData();
-            }
-        }
+        movieManager.fetchMoviesFor(query: searchText!);
     }
     
-    func fetchPosterFor(_ cell: inout MovieCollectionViewCell, at movieIndex: Int) {
-        
-//        let posterPath = movieResults[movieIndex].posterPath
-//        movieManager.fetchPosterFrom(path: posterPath) { returnedMoviePoster in
-//            
-//            DispatchQueue.main.async {
-//            
-//                if let poster = returnedMoviePoster {
-//                    cell.moviePoster.image = poster;
-//                    cell.hasPoster = true;
-//            
-//                    self.movieResults[movieIndex].poster = poster;
-//                } else {
-//                    cell.hasPoster = false;
-//                }
-//            }
-//        }
-    }
-    
-    func fetchPosterFor(movieIndex: Int) {
-        
-//        var cache = NSCache<AnyObject, AnyObject>();
-//        if let cachedMoviePoster = cache.object(forKey: posterPath as AnyObject) as? UIImage {
-//        self?.cache.setObject(moviePoster, forKey: self?.posterPath as AnyObject);
-        
-        let targetMovie: Movie = movieResults[movieIndex];
-        let posterPath = targetMovie.posterPath;
-        
-        movieManager.fetchPosterFrom(path: posterPath) { [weak self] returnedMoviePoster in
-            
-            if let moviePoster = returnedMoviePoster {
-                targetMovie.poster = moviePoster;
-            }
-            //deal with cache and no image found
-            
-            //does this need to be on main thread?
-            self?.movieResults[movieIndex] = targetMovie;
-        }
-    }
-    
+////        var cache = NSCache<AnyObject, AnyObject>();
+////        if let cachedMoviePoster = cache.object(forKey: posterPath as AnyObject) as? UIImage {
+////        self?.cache.setObject(moviePoster, forKey: self?.posterPath as AnyObject);
+
     func setUpLayout() {
         let space: CGFloat = 0.0;
         
@@ -153,6 +128,10 @@ extension MovieCollectionViewController {
     }
 }
 
+
+/*
+ *  Segue
+ */
 extension MovieCollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -168,6 +147,9 @@ extension MovieCollectionViewController {
     }
 }
 
+/*
+ *  Search bar
+ */
 extension MovieCollectionViewController: UISearchBarDelegate{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -181,7 +163,7 @@ extension MovieCollectionViewController: UISearchBarDelegate{
         if(searchText.isEmpty){
             print("search changed");
             //reload your data source if necessary
-            //            self.collectionView?.reloadData()
+            //self.collectionView?.reloadData()
         }
     }
 }

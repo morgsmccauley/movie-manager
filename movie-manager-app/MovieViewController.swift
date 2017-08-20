@@ -10,7 +10,7 @@ import UIKit
 
 class MovieViewController: UIViewController {
   
-    @IBOutlet weak var moviePoster: UIImageView!
+    @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var moviePlot: UITextField!
     
@@ -27,7 +27,9 @@ class MovieViewController: UIViewController {
         
         if let poster = movie?.poster {
             
-//            self.moviePoster.image = poster;
+            print(poster);
+//            self.movieImage.image = poster;
+//            self.movieTitle.text = movie?.title;
         }
         
 //        movieTitle.text = movie?.title;
