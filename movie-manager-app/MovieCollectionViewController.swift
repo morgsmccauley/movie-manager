@@ -8,13 +8,13 @@
 
 import UIKit
 
-private let reuseIdentifier = "MovieCell"
+private let COLLECTION_VIEW_CELL_IDENTIFIER = "MovieCell";
+private let COLLECTION_VIEW_HEADER_IDENTIFIER = "CollectionViewHeader";
 
 class MovieCollectionViewController: UICollectionViewController {
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!;
     
-    var searchController : UISearchController!;
     let movieManager = MovieManager();
     
     var movieResults: [Movie] = [] {
@@ -25,6 +25,7 @@ class MovieCollectionViewController: UICollectionViewController {
             }
         }
     };
+
     var searchText: String? {
         
         didSet {
@@ -53,25 +54,30 @@ class MovieCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MovieCollectionViewCell;
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: COLLECTION_VIEW_CELL_IDENTIFIER, for: indexPath) as! MovieCollectionViewCell;
     
         cell.setUpView();
         cell.movieTitle.text? = movieResults[indexPath.row].title;
         
-        let posterPath = movieResults[indexPath.row].posterPath;
-        
-        
-        movieManager.fetchImage(path: posterPath) { returnedMoviePoster in
-
-            DispatchQueue.main.async {
+        if let poster = movieResults[indexPath.row].poster {
+            
+            cell.moviePoster.image = poster;
+            cell.hasPoster = true;
+        } else {
+            
+            let posterPath = movieResults[indexPath.row].posterPath;
+            movieManager.fetchImage(path: posterPath) { returnedMoviePoster in
                 
-                if let poster = returnedMoviePoster {
-                    cell.moviePoster.image = poster;
-                    cell.hasPoster = true;
+                DispatchQueue.main.async {
                     
-                    self.movieResults[indexPath.row].poster = poster;
-                } else {
-                    cell.hasPoster = false;
+                    if let poster = returnedMoviePoster {
+                        cell.moviePoster.image = poster;
+                        cell.hasPoster = true;
+                        
+                        self.movieResults[indexPath.row].poster = poster;
+                    } else {
+                        cell.hasPoster = false;
+                    }
                 }
             }
         }
@@ -82,7 +88,7 @@ class MovieCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if (kind == UICollectionElementKindSectionHeader) {
-            let headerView:UICollectionReusableView =  collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CollectionViewHeader", for: indexPath)
+            let headerView:UICollectionReusableView =  collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: COLLECTION_VIEW_HEADER_IDENTIFIER, for: indexPath)
             
             return headerView
         }
@@ -99,19 +105,11 @@ extension MovieCollectionViewController: MovieManagerDelegate {
     func movieFetchComplete(movies: [Movie]) {
         self.movieResults = movies;
     }
-    
-    func imageFetchComplete(image: UIImage) {
-        
-    }
-    
+
     func searchForMovies() {
         
         movieManager.fetchMoviesFor(query: searchText!);
     }
-    
-////        var cache = NSCache<AnyObject, AnyObject>();
-////        if let cachedMoviePoster = cache.object(forKey: posterPath as AnyObject) as? UIImage {
-////        self?.cache.setObject(moviePoster, forKey: self?.posterPath as AnyObject);
 
     func setUpLayout() {
         let space: CGFloat = 0.0;
@@ -143,27 +141,16 @@ extension MovieCollectionViewController {
             let destination = segue.destination as? MovieViewController {
             
             destination.movie = movieResults[(indexPath as NSIndexPath).row];
-        }
-    }
-}
-
-/*
- *  Search bar
- */
-extension MovieCollectionViewController: UISearchBarDelegate{
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        if(!(searchBar.text?.isEmpty)!){
-            searchText = searchBar.text!
-        }
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if(searchText.isEmpty){
-            print("search changed");
-            //reload your data source if necessary
-            //self.collectionView?.reloadData()
+            
+            let backdropPath = movieResults[(indexPath as NSIndexPath).row].backdropPath;
+            print(backdropPath);
+            movieManager.fetchImage(path: backdropPath) { returnedBackdrop in
+                
+                DispatchQueue.main.async {
+                    destination.movieImage?.image = returnedBackdrop;
+                }
+            }
+            
         }
     }
 }

@@ -35,5 +35,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "movie-manager-app/MovieManager.swift"
+            timestampString = "526043581.476719"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "makeMovieRequest(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "movie-manager-app/MovieManager.swift"
+            timestampString = "526043581.476719"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "makeMovieRequest(with:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "movie_manager_app.MovieManager.(makeMovieRequest in _9C41C777DC916989490AB989EAD6F4F9) (with : Swift.String) -&gt; ()"
+                  moduleName = "movie-manager-app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/morganmccauley/Developer/movie-manager-app/movie-manager-app/MovieManager.swift"
+                  timestampString = "526039889.466693"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "movie_manager_app.MovieManager.((makeMovieRequest in _9C41C777DC916989490AB989EAD6F4F9) (with : Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "movie-manager-app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/morganmccauley/Developer/movie-manager-app/movie-manager-app/MovieManager.swift"
+                  timestampString = "526039889.469938"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "23">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
