@@ -9,6 +9,7 @@
 import UIKit
 
 private let SEARCH_VIEW_CELL_IDENTIFIER = "SearchResultCell";
+private let MAX_SEARCH_RESULTS = 5;
 
 //both these classes should inherit from a base class that does the integration with the model
 class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate, MovieManagerDelegate {
@@ -25,8 +26,11 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
 
     var searchResults: [Movie] = [] {
         didSet {
-            print("search results: ");
-            print(searchResults);
+            if searchResults.count > 0 {
+                let resultsGreaterThanMaxRange = searchResults.startIndex.advanced(by: MAX_SEARCH_RESULTS)..<searchResults.endIndex;
+                searchResults.removeSubrange(resultsGreaterThanMaxRange);
+            }
+
             DispatchQueue.main.async {
                 self.tableView!.reloadData();
             }
@@ -35,6 +39,8 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.tableView.rowHeight = 170;
 
         searchBar.delegate = self;
         movieManager.delegate = self;
@@ -58,14 +64,27 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SEARCH_VIEW_CELL_IDENTIFIER, for: indexPath) as! MovieSearchTableViewCell;
 
-        print("entered cell");
+        let movieForRow = searchResults[(indexPath as NSIndexPath).row];
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: SEARCH_VIEW_CELL_IDENTIFIER, for: indexPath);
+        cell.movieTitle?.text = movieForRow.title;
+        cell.releaseDate?.text = movieForRow.releaseDate;
 
+        let posterPath = movieForRow.posterPath;
+        movieManager.fetchImage(path: posterPath) { returnedMoviePoster in
+            DispatchQueue.main.async {
 
+                if let poster = returnedMoviePoster {
+                    cell.moviePoster.image = poster;
+//                    cell.hasPoster = true;
 
-        cell.textLabel?.text = searchResults[(indexPath as NSIndexPath).row].title;
+//                    self.movieResults[indexPath.row].poster = poster;
+                } else {
+//                    cell.hasPoster = false;
+                }
+            }
+        }
 
         return cell
     }

@@ -31,6 +31,8 @@ class MovieManager{
 
         guard let escapedQuery = query.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
             print("ERROR: Cannot escape query for movie search");
+            delegate?.movieFetchComplete(movies: []);
+
             return;
         }
         
@@ -42,6 +44,8 @@ class MovieManager{
         
         guard let escapedQuery = query.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
             print("ERROR: Cannot escape query for multi search");
+            delegate?.movieFetchComplete(movies: []);
+
             return;
         }
         
@@ -54,6 +58,8 @@ class MovieManager{
         //should be able to trust url
         guard let endpointUrl = URL(string: endpoint) else {
             print("ERROR: cannot convert endpoint to url");
+            delegate?.movieFetchComplete(movies: []);
+
             return;
         }
         
@@ -62,6 +68,8 @@ class MovieManager{
             guard let jsonResponse = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: AnyObject],
                   let movieJson = jsonResponse["results"] as? [[String: AnyObject]] else {
                     print("ERROR: could not covert response to JSON");
+                    self?.delegate?.movieFetchComplete(movies: []);
+
                     return;
             }
             

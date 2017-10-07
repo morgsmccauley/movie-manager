@@ -18,9 +18,14 @@ class Movie {
     let releaseDate: String;
     let overview: String;
     let popularity: Int;
-    
+
+    var genres: String = "";
+    var budget: Int = -1;
+    var company: String = "";
+    var runtime: Int = -1;
+
     var poster: UIImage? = nil;
-    
+
     init(id: Int, title: String, posterPath: String, backdropPath: String, releaseDate: String, overview: String, popularity: Int) {
         self.id = id;
         self.title = title;

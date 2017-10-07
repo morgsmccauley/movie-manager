@@ -17,11 +17,10 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     var hasPoster: Bool = false {
         didSet {
-            
             activityIndicator.stopAnimating();
             activityIndicator.isHidden = true;
             
-            if !hasPoster {
+            if (!hasPoster) {
                 setNoImage();
             }
         }
