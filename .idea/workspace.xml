@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6caa570-6a0c-4a8d-9771-07d3273c4f19" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/movie-manager-app/MovieSearchTableViewCell.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/movie-manager-app.xcodeproj/project.xcworkspace/xcuserdata/morganmccauley.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/movie-manager-app.xcodeproj/project.xcworkspace/xcuserdata/morganmccauley.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/movie-manager-app.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/movie-manager-app.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/movie-manager-app/Base.lproj/Main.storyboard" afterPath="$PROJECT_DIR$/movie-manager-app/Base.lproj/Main.storyboard" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/movie-manager-app.xcodeproj/xcuserdata/morganmccauley.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" afterPath="$PROJECT_DIR$/movie-manager-app.xcodeproj/xcuserdata/morganmccauley.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/movie-manager-app/Movie.swift" afterPath="$PROJECT_DIR$/movie-manager-app/Movie.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/movie-manager-app/MovieCollectionViewCell.swift" afterPath="$PROJECT_DIR$/movie-manager-app/MovieCollectionViewCell.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/movie-manager-app/MovieCollectionViewController.swift" afterPath="$PROJECT_DIR$/movie-manager-app/MovieCollectionViewController.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/movie-manager-app/MovieManager.swift" afterPath="$PROJECT_DIR$/movie-manager-app/MovieManager.swift" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/movie-manager-app/MovieSearchTableViewController.swift" afterPath="$PROJECT_DIR$/movie-manager-app/MovieSearchTableViewController.swift" />
     </list>
@@ -23,21 +19,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_51B835BA-685B-4C80-90DE-5E16C412520D" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MovieManager.swift" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MovieManager.swift" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/movie-manager-app/MovieManager.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="16" column="55" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppDelegate.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/movie-manager-app/AppDelegate.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="122">
-              <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+            <state relative-caret-position="382">
+              <caret line="186" column="61" lean-forward="true" selection-start-line="186" selection-start-column="61" selection-end-line="186" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -46,18 +32,18 @@
       <file leaf-file-name="MovieCollectionViewController.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/movie-manager-app/MovieCollectionViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="76" column="16" lean-forward="false" selection-start-line="76" selection-start-column="16" selection-end-line="76" selection-end-column="16" />
+            <state relative-caret-position="2007">
+              <caret line="137" column="35" lean-forward="false" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MovieSearchTableViewController.swift" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MovieSearchTableViewController.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/movie-manager-app/MovieSearchTableViewController.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8">
-              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+            <state relative-caret-position="452">
+              <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -66,8 +52,8 @@
       <file leaf-file-name="Movie.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/movie-manager-app/Movie.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="221">
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -76,8 +62,8 @@
       <file leaf-file-name="MovieCollectionViewCell.swift" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/movie-manager-app/MovieCollectionViewCell.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="30" column="43" lean-forward="false" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
+            <state relative-caret-position="360">
+              <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -99,6 +85,11 @@
     <findStrings>
       <find>searchController</find>
       <find>search</find>
+      <find>image</find>
+      <find>imagefet</find>
+      <find>imageFetchCallback</find>
+      <find>with</find>
+      <find>imagefetch</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -110,12 +101,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/movie-manager-app/MovieManager.swift" />
         <option value="$PROJECT_DIR$/movie-manager-app/MovieCollectionViewController.swift" />
         <option value="$PROJECT_DIR$/movie-manager-app/MovieCollectionViewCell.swift" />
         <option value="$PROJECT_DIR$/movie-manager-app/MovieSearchTableViewCell.swift" />
         <option value="$PROJECT_DIR$/movie-manager-app/MovieSearchTableViewController.swift" />
         <option value="$PROJECT_DIR$/movie-manager-app/Movie.swift" />
+        <option value="$PROJECT_DIR$/movie-manager-app/MovieManager.swift" />
       </list>
     </option>
   </component>
@@ -209,7 +200,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20657000" />
+    <option name="totallyTimeSpent" value="35308000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -219,7 +210,7 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26723096" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.50277776" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35912937" sideWeight="0.49722221" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29020557" sideWeight="0.49722221" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -295,47 +286,15 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/movie-manager-app/SearchCollectionReusableView.swift" />
-    <entry file="file://$PROJECT_DIR$/movie-manager-app/AppDelegate.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="appcode.project-settings://82b3b029">
       <provider selected="true" editor-type-id="AppCode.ProjectSettings">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/movie-manager-app/MovieManager.swift">
+    <entry file="file://$PROJECT_DIR$/movie-manager-app/AppDelegate.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="16" column="55" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie-manager-app/MovieCollectionViewCell.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="30" column="43" lean-forward="false" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie-manager-app/MovieCollectionViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="76" column="16" lean-forward="false" selection-start-line="76" selection-start-column="16" selection-end-line="76" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie-manager-app/Movie.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="122">
+          <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -348,10 +307,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/movie-manager-app/MovieCollectionViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2007">
+          <caret line="137" column="35" lean-forward="false" selection-start-line="137" selection-start-column="30" selection-end-line="137" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie-manager-app/MovieCollectionViewCell.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie-manager-app/Movie.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/movie-manager-app/MovieSearchTableViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+        <state relative-caret-position="452">
+          <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie-manager-app/MovieManager.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="186" column="61" lean-forward="true" selection-start-line="186" selection-start-column="61" selection-end-line="186" selection-end-column="61" />
           <folding />
         </state>
       </provider>

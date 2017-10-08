@@ -64,19 +64,22 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SEARCH_VIEW_CELL_IDENTIFIER, for: indexPath) as! MovieSearchTableViewCell;
+        let row = tableView.dequeueReusableCell(withIdentifier: SEARCH_VIEW_CELL_IDENTIFIER, for: indexPath) as! MovieSearchTableViewCell;
 
         let movieForRow = searchResults[(indexPath as NSIndexPath).row];
 
-        cell.movieTitle?.text = movieForRow.title;
-        cell.releaseDate?.text = movieForRow.releaseDate;
+        row.movieTitle?.text = movieForRow.title;
+        row.releaseDate?.text = movieForRow.releaseDate;
+        row.genres?.text = movieForRow.genres;
+        row.runtime?.text = movieForRow.runtime;
+//        row.popularity?.text = movieForRow.popularity;
 
         let posterPath = movieForRow.posterPath;
         movieManager.fetchImage(path: posterPath) { returnedMoviePoster in
             DispatchQueue.main.async {
 
                 if let poster = returnedMoviePoster {
-                    cell.moviePoster.image = poster;
+                    row.moviePoster.image = poster;
 //                    cell.hasPoster = true;
 
 //                    self.movieResults[indexPath.row].poster = poster;
@@ -86,6 +89,6 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
             }
         }
 
-        return cell
+        return row
     }
 }

@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
-            landmarkName = "makeMovieRequest(with:)"
+            landmarkName = "fetchImage(path:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
             endingLineNumber = "57"
-            landmarkName = "makeMovieRequest(with:)"
+            landmarkName = "fetchImage(path:completionHandler:)"
             landmarkType = "7">
             <Locations>
                <Location
