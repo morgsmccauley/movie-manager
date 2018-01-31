@@ -12,23 +12,21 @@ private let COLLECTION_VIEW_CELL_IDENTIFIER = "MovieCell";
 private let COLLECTION_VIEW_HEADER_IDENTIFIER = "CollectionViewHeader";
 private let MOVIE_VIEW_SEGUE_IDENTIFIER = "MovieViewSegue";
 
-class MovieCollectionViewController: UICollectionViewController {
+class MovieCollectionViewController: UICollectionViewController, MovieManagerDelegate {
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!;
     
     let movieManager = MovieManager();
-    
+
+    func movieFetchComplete(movies: [Movie]) {
+        self.movieResults = movies;
+    }
+
     var movieResults: [Movie] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView!.reloadData();
             }
-        }
-    };
-
-    var searchText: String? {
-        didSet {
-            searchForMovies();
         }
     };
     
@@ -92,6 +90,7 @@ class MovieCollectionViewController: UICollectionViewController {
         return cell;
     }
     
+    //what does this do?
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if (kind == UICollectionElementKindSectionHeader) {
             let headerView:UICollectionReusableView =  collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: COLLECTION_VIEW_HEADER_IDENTIFIER, for: indexPath)
@@ -101,47 +100,27 @@ class MovieCollectionViewController: UICollectionViewController {
         
         return UICollectionReusableView();
     }
-}
 
-/*
- *  Interact with model
- */
-extension MovieCollectionViewController: MovieManagerDelegate {
-
-    func movieFetchComplete(movies: [Movie]) {
-        self.movieResults = movies;
-    }
-
-    func searchForMovies() {
-        movieManager.fetchMoviesFor(query: searchText!);
-    }
-}
-
-
-/*
- *  Segue
- */
-extension MovieCollectionViewController {
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+
         guard segue.identifier == MOVIE_VIEW_SEGUE_IDENTIFIER else { return; }
-        
+
         if let cell = sender as? MovieCollectionViewCell,
-            let indexPath = self.collectionView!.indexPath(for: cell),
-            let destination = segue.destination as? MovieViewController {
-            
+           let indexPath = self.collectionView!.indexPath(for: cell),
+           let destination = segue.destination as? MovieViewController {
+
             destination.movie = movieResults[(indexPath as NSIndexPath).row];
-            
+
             let backdropPath = movieResults[(indexPath as NSIndexPath).row].backdropPath;
             print(backdropPath);
             movieManager.fetchImage(path: backdropPath) { returnedBackdrop in
-                
+
                 DispatchQueue.main.async {
                     destination.movieImage?.image = returnedBackdrop;
                 }
             }
-            
+
         }
     }
 }
+

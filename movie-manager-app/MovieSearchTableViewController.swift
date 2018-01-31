@@ -10,23 +10,27 @@ import UIKit
 
 private let SEARCH_VIEW_CELL_IDENTIFIER = "SearchResultCell";
 private let MAX_SEARCH_RESULTS = 5;
+private let DEFAULT_ROW_HEIGHT = CGFloat(170);
 
-//both these classes should inherit from a base class that does the integration with the model
+//both these classes should inherit from a base class that does the integration with the model - will this work?
 class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate, MovieManagerDelegate {
-
     @IBOutlet weak var searchBar: UISearchBar!;
 
     let movieManager = MovieManager();
 
     var searchText: String = "" {
         didSet {
-            movieManager.fetchMoviesFor(query: searchText)
+            if (!searchText.isEmpty) {
+                executeDelayedSearch(text: searchText);
+            } else {
+                clearSearchResults();
+            }
         }
     }
 
     var searchResults: [Movie] = [] {
         didSet {
-            if searchResults.count > 0 {
+            if (searchResults.count > MAX_SEARCH_RESULTS) {
                 let resultsGreaterThanMaxRange = searchResults.startIndex.advanced(by: MAX_SEARCH_RESULTS)..<searchResults.endIndex;
                 searchResults.removeSubrange(resultsGreaterThanMaxRange);
             }
@@ -40,18 +44,31 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.rowHeight = 170;
+        self.tableView.rowHeight = DEFAULT_ROW_HEIGHT; //why cant i set this statically in the view ?
 
         searchBar.delegate = self;
         movieManager.delegate = self;
+    }
+    
+    func executeDelayedSearch(text: String) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let isLatestSearchText = self.searchText == text;
+            if (isLatestSearchText) {
+                print("executing search: " + self.searchText)
+                self.movieManager.fetchMoviesFor(query: self.searchText);
+            }
+        }
     }
 
     func movieFetchComplete(movies: [Movie]) {
         searchResults = movies;
     }
+    
+    func clearSearchResults() {
+        searchResults = [];
+    }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("search changed: " + searchText);
         self.searchText = searchText;
     }
 
@@ -73,6 +90,8 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
         row.genres?.text = movieForRow.genres;
         row.runtime?.text = movieForRow.runtime;
 //        row.popularity?.text = movieForRow.popularity;
+
+        row.setUpView();
 
         let posterPath = movieForRow.posterPath;
         movieManager.fetchImage(path: posterPath) { returnedMoviePoster in
