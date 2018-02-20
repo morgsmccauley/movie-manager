@@ -12,6 +12,7 @@ private let COLLECTION_VIEW_CELL_IDENTIFIER = "MovieCell";
 private let COLLECTION_VIEW_HEADER_IDENTIFIER = "CollectionViewHeader";
 private let MOVIE_VIEW_SEGUE_IDENTIFIER = "MovieViewSegue";
 
+//split and extend
 class MovieCollectionViewController: UICollectionViewController, MovieManagerDelegate {
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!;
@@ -94,7 +95,6 @@ class MovieCollectionViewController: UICollectionViewController, MovieManagerDel
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
         guard segue.identifier == MOVIE_VIEW_SEGUE_IDENTIFIER else { return; }
 
         if let cell = sender as? MovieCollectionViewCell,
@@ -104,9 +104,7 @@ class MovieCollectionViewController: UICollectionViewController, MovieManagerDel
             destination.movie = movieResults[(indexPath as NSIndexPath).row];
 
             let backdropPath = movieResults[(indexPath as NSIndexPath).row].backdropPath;
-            print(backdropPath);
             movieManager.fetchImage(path: backdropPath) { returnedBackdrop in
-
                 DispatchQueue.main.async {
                     destination.movieImage?.image = returnedBackdrop;
                 }
