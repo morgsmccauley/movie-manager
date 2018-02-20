@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -37,44 +36,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="171" height="207"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xwS-pM-59o">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xwS-pM-59o">
                                             <rect key="frame" x="-8" y="-8" width="187" height="223"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zF-CQ-QCO">
-                                            <rect key="frame" x="0.0" y="153" width="171" height="54"/>
-                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.99192438469999999" green="0.99192438469999999" blue="0.99192438469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Image not found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0y-t2-Qvl">
-                                            <rect key="frame" x="36" y="72" width="98" height="62"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="VhF-2u-n8S">
-                                            <rect key="frame" x="75" y="93" width="20" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </activityIndicatorView>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="xwS-pM-59o" firstAttribute="top" secondItem="mq6-Lx-jxQ" secondAttribute="topMargin" constant="-8" id="5LH-Tb-dug"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="6zF-CQ-QCO" secondAttribute="trailing" constant="-8" id="NT3-1x-inl"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="6zF-CQ-QCO" secondAttribute="bottom" constant="-8" id="QUH-CI-1yc"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="xwS-pM-59o" secondAttribute="bottom" constant="-8" id="RLK-qL-vep"/>
-                                    <constraint firstItem="Y0y-t2-Qvl" firstAttribute="width" secondItem="mq6-Lx-jxQ" secondAttribute="width" id="SQd-NK-cj9"/>
-                                    <constraint firstItem="xwS-pM-59o" firstAttribute="leading" secondItem="mq6-Lx-jxQ" secondAttribute="leadingMargin" constant="-8" id="UKD-P9-tvI"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="xwS-pM-59o" secondAttribute="trailing" constant="-8" id="WXe-BV-oeG"/>
-                                    <constraint firstItem="Y0y-t2-Qvl" firstAttribute="height" secondItem="mq6-Lx-jxQ" secondAttribute="height" id="Zs8-js-PRe"/>
-                                    <constraint firstItem="6zF-CQ-QCO" firstAttribute="leading" secondItem="mq6-Lx-jxQ" secondAttribute="leadingMargin" constant="-8" id="eZc-WX-7WN"/>
+                                    <constraint firstItem="xwS-pM-59o" firstAttribute="height" secondItem="mq6-Lx-jxQ" secondAttribute="height" id="mam-DM-67p"/>
+                                    <constraint firstItem="xwS-pM-59o" firstAttribute="width" secondItem="mq6-Lx-jxQ" secondAttribute="width" id="rUy-Eu-svJ"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="activityIndicator" destination="VhF-2u-n8S" id="Ljb-ow-8hT"/>
                                     <outlet property="moviePoster" destination="xwS-pM-59o" id="wnc-Pq-SLl"/>
-                                    <outlet property="movieTitle" destination="6zF-CQ-QCO" id="yDb-6h-zfz"/>
-                                    <outlet property="noImageLabel" destination="Y0y-t2-Qvl" id="fu6-ks-4BJ"/>
                                     <segue destination="FS4-wf-7nX" kind="show" identifier="MovieViewSegue" id="sVd-Dc-HHL"/>
                                 </connections>
                             </collectionViewCell>

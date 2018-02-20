@@ -62,32 +62,24 @@ class MovieCollectionViewController: UICollectionViewController, MovieManagerDel
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: COLLECTION_VIEW_CELL_IDENTIFIER, for: indexPath) as! MovieCollectionViewCell;
-    
-        cell.setUpView();
-        cell.movieTitle.text? = movieResults[indexPath.row].title;
         
-        if let poster = movieResults[indexPath.row].poster {
+        getMoviePoster(movieIndex: indexPath.row, cell: cell)
+        return cell;
+    }
+    
+    private func getMoviePoster(movieIndex: Int, cell: MovieCollectionViewCell) {
+        if let poster = movieResults[movieIndex].poster {
             cell.moviePoster.image = poster;
-            cell.hasPoster = true;
-        } else {
-            let posterPath = movieResults[indexPath.row].posterPath;
-            movieManager.fetchImage(path: posterPath) { returnedMoviePoster in
-                
-                DispatchQueue.main.async {
-                    
-                    if let poster = returnedMoviePoster {
-                        cell.moviePoster.image = poster;
-                        cell.hasPoster = true;
-                        
-                        self.movieResults[indexPath.row].poster = poster;
-                    } else {
-                        cell.hasPoster = false;
-                    }
-                }
-            }
+            return;
         }
         
-        return cell;
+        let posterPath = movieResults[movieIndex].posterPath;
+        movieManager.fetchImage(path: posterPath) { poster in
+            DispatchQueue.main.async {
+                cell.moviePoster.image = poster;
+                self.movieResults[movieIndex].poster = poster;
+            }
+        }
     }
     
     //what does this do?
