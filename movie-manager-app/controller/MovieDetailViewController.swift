@@ -8,20 +8,20 @@
 
 import UIKit
 
-class MovieViewController: UIViewController {
+class MovieDetailViewController: UIViewController {
   
     @IBOutlet weak var movieImage: UIImageView! //need to set height for this
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieOverview: UILabel!
     
     @IBAction func closeViewController(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil);
     }
     
     var movie: Movie? {
         didSet {
             movieTitle?.text = movie?.title;
-            movieOverview.text = movie?.overview;
+            movieOverview?.text = movie?.overview;
         }
     }
     
