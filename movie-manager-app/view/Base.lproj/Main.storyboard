@@ -13,6 +13,9 @@
         <array key="HelveticaNeue.ttc">
             <string>HelveticaNeue-Bold</string>
         </array>
+        <array key="Raleway-Medium.ttf">
+            <string>Raleway-Medium</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Profile-->
@@ -48,25 +51,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xk1-aR-Rp1" userLabel="Header View">
-                                <rect key="frame" x="0.0" y="20" width="375" height="50"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYr-cv-FNY">
-                                        <rect key="frame" x="158" y="15" width="59" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="dYr-cv-FNY" firstAttribute="centerX" secondItem="Xk1-aR-Rp1" secondAttribute="centerX" id="aRv-EV-uIm"/>
-                                    <constraint firstAttribute="height" constant="50" id="dN7-D2-tvY" userLabel="Header Height Constraint"/>
-                                    <constraint firstItem="dYr-cv-FNY" firstAttribute="centerY" secondItem="Xk1-aR-Rp1" secondAttribute="centerY" id="o62-Gl-Y8C"/>
-                                </constraints>
-                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="C25-D7-GqH">
-                                <rect key="frame" x="0.0" y="70" width="375" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fwf-U4-Ay2">
                                     <size key="itemSize" width="181" height="255"/>
@@ -104,13 +90,36 @@
                                     <outlet property="delegate" destination="Ykc-gJ-ipT" id="9i9-Lf-Bj3"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xk1-aR-Rp1" userLabel="Header View">
+                                <rect key="frame" x="0.0" y="20" width="375" height="90"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HeaderGradient" translatesAutoresizingMaskIntoConstraints="NO" id="OMe-FS-iWt" userLabel="Gradient Image">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYr-cv-FNY">
+                                        <rect key="frame" x="156.5" y="10" width="62.5" height="21"/>
+                                        <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="18"/>
+                                        <color key="textColor" red="0.99192438469999999" green="0.99192438469999999" blue="0.99192438469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="OMe-FS-iWt" firstAttribute="height" secondItem="Xk1-aR-Rp1" secondAttribute="height" id="1iv-7q-h3O"/>
+                                    <constraint firstItem="OMe-FS-iWt" firstAttribute="width" secondItem="Xk1-aR-Rp1" secondAttribute="width" id="Eez-88-gwX"/>
+                                    <constraint firstItem="OMe-FS-iWt" firstAttribute="top" secondItem="Xk1-aR-Rp1" secondAttribute="top" id="KGx-Eb-w07"/>
+                                    <constraint firstItem="OMe-FS-iWt" firstAttribute="leading" secondItem="Xk1-aR-Rp1" secondAttribute="leading" id="Uau-5O-czm"/>
+                                    <constraint firstItem="dYr-cv-FNY" firstAttribute="centerX" secondItem="Xk1-aR-Rp1" secondAttribute="centerX" id="aRv-EV-uIm"/>
+                                    <constraint firstAttribute="height" constant="90" id="dN7-D2-tvY" userLabel="Header Height Constraint"/>
+                                    <constraint firstItem="dYr-cv-FNY" firstAttribute="centerY" secondItem="Xk1-aR-Rp1" secondAttribute="centerY" constant="-25" id="o62-Gl-Y8C"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="C25-D7-GqH" secondAttribute="trailing" id="4Mq-ar-fxQ"/>
                             <constraint firstItem="Xk1-aR-Rp1" firstAttribute="top" secondItem="ljM-Ad-a5b" secondAttribute="bottom" id="Ajh-Hq-anL"/>
                             <constraint firstItem="Xk1-aR-Rp1" firstAttribute="leading" secondItem="lrM-DX-cA4" secondAttribute="leading" id="Jhu-4G-aB8"/>
-                            <constraint firstItem="C25-D7-GqH" firstAttribute="top" secondItem="Xk1-aR-Rp1" secondAttribute="bottom" id="gZE-gF-NWO"/>
+                            <constraint firstItem="C25-D7-GqH" firstAttribute="top" secondItem="lrM-DX-cA4" secondAttribute="top" id="gZE-gF-NWO"/>
                             <constraint firstItem="C25-D7-GqH" firstAttribute="leading" secondItem="lrM-DX-cA4" secondAttribute="leading" id="uwn-uL-KT3"/>
                             <constraint firstItem="6z0-wW-5Yq" firstAttribute="top" secondItem="C25-D7-GqH" secondAttribute="bottom" id="v20-kA-xy8"/>
                             <constraint firstAttribute="trailing" secondItem="Xk1-aR-Rp1" secondAttribute="trailing" id="zLZ-Vu-O2T"/>
@@ -120,11 +129,12 @@
                     <connections>
                         <outlet property="collectionView" destination="C25-D7-GqH" id="eo3-BW-gao"/>
                         <outlet property="flowLayout" destination="fwf-U4-Ay2" id="w6w-gb-UfA"/>
+                        <outlet property="headerHeightConstraint" destination="dN7-D2-tvY" id="Iis-JU-yVx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D9a-Ty-IMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1969" y="331"/>
+            <point key="canvasLocation" x="1968.8" y="330.58470764617692"/>
         </scene>
         <!--Search-->
         <scene sceneID="zjI-oy-PVM">
@@ -297,6 +307,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="HeaderGradient" width="375" height="90"/>
         <image name="close" width="50" height="50"/>
         <image name="discover" width="30" height="30"/>
         <image name="profile" width="30" height="30"/>

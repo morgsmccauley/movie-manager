@@ -11,9 +11,9 @@ import UIKit
 class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!;
+    @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!;
     
     let movieManager = MovieManager();
-    
     var movieResults: [Movie] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -21,6 +21,11 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
             }
         }
     };
+    
+    let minHeaderHeight: CGFloat = 0;
+    let maxHeaderHeight: CGFloat = 90;
+    var previousScrollOffset:CGFloat = 0;
+    var isInitialScroll = true; //to prevent header changing from initial hide status bar scroll
     
     func movieFetchComplete(movies: [Movie]) {
         self.movieResults = movies;
@@ -99,5 +104,33 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
             }
             
         }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (isInitialScroll) {
+            isInitialScroll = false;
+            return;
+        }
+        
+        let scrollDiff = scrollView.contentOffset.y - self.previousScrollOffset
+        
+        let absoluteTop: CGFloat = 0;
+        let absoluteBottom: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height;
+        
+        let isScrollingDown = scrollDiff > 0 && scrollView.contentOffset.y > absoluteTop
+        let isScrollingUp = scrollDiff < 0 && scrollView.contentOffset.y < absoluteBottom
+        
+        var newHeight = self.headerHeightConstraint.constant
+        if isScrollingDown {
+            newHeight = max(self.minHeaderHeight, self.headerHeightConstraint.constant - abs(scrollDiff))
+        } else if isScrollingUp {
+            newHeight = min(self.maxHeaderHeight, self.headerHeightConstraint.constant + abs(scrollDiff))
+        }
+        
+        if newHeight != self.headerHeightConstraint.constant {
+            self.headerHeightConstraint.constant = newHeight
+        }
+        
+        self.previousScrollOffset = scrollView.contentOffset.y
     }
 }

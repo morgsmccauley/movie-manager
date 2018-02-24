@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "movie-manager-app/controller/MovieDiscoveryViewController.swift"
-            timestampString = "541125470.347567"
+            timestampString = "541138965.701571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,59 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "movie-manager-app/controller/MovieDiscoveryViewController.swift"
-            timestampString = "541125470.348343"
+            timestampString = "541138965.701685"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "MovieDiscoveryViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "movie_manager_app.MovieDiscoveryViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; movie_manager_app.MovieDiscoveryViewController"
-                  moduleName = "movie-manager-app"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/morganmccauley/Developer/movie-manager-app/movie-manager-app/controller/MovieDiscoveryViewController.swift"
-                  timestampString = "540985279.864387"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "434">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "movie_manager_app.MovieDiscoveryViewController.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;movie_manager_app.MovieDiscoveryViewController&gt;"
-                  moduleName = "movie-manager-app"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/morganmccauley/Developer/movie-manager-app/movie-manager-app/controller/MovieDiscoveryViewController.swift"
-                  timestampString = "540985279.8668669"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "355">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "movie-manager-app/controller/MovieDiscoveryViewController.swift"
-            timestampString = "541125470.348798"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "movieFetchComplete(movies:)"
             landmarkType = "7">
          </BreakpointContent>

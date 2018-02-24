@@ -61,6 +61,9 @@
 		24ED45E21F0CAC56004D55CF /* movie-manager-appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "movie-manager-appUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24ED45E61F0CAC56004D55CF /* movie_manager_appUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = movie_manager_appUITests.swift; sourceTree = "<group>"; };
 		24ED45E81F0CAC56004D55CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24F87E8F2041127B0032189C /* Raleway-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Medium.ttf"; path = "../../../../Library/Fonts/Raleway-Medium.ttf"; sourceTree = "<group>"; };
+		24F87E902041127C0032189C /* Raleway-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Thin.ttf"; path = "../../../../Library/Fonts/Raleway-Thin.ttf"; sourceTree = "<group>"; };
+		24F87E912041127C0032189C /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Bold.ttf"; path = "../../../../Library/Fonts/Raleway-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +143,7 @@
 		24ED45C21F0CAC56004D55CF /* movie-manager-app */ = {
 			isa = PBXGroup;
 			children = (
+				24F87E8E204112660032189C /* fonts */,
 				2452ED9C203EA5490026D96C /* controller */,
 				2452ED9B203EA5430026D96C /* view */,
 				2452ED9A203EA5390026D96C /* model */,
@@ -176,6 +180,16 @@
 				24ED45CF1F0CAC56004D55CF /* LaunchScreen.storyboard */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		24F87E8E204112660032189C /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				24F87E912041127C0032189C /* Raleway-Bold.ttf */,
+				24F87E8F2041127B0032189C /* Raleway-Medium.ttf */,
+				24F87E902041127C0032189C /* Raleway-Thin.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
