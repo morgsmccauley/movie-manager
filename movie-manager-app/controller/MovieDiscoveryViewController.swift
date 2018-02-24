@@ -21,6 +21,8 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
             }
         }
     };
+    var currentPageRequestNumber = 1;
+//    var currentDiscoverySearchMethod: (MovieManager) -> (Int) -> () = MovieManager.fetchPopularMovies;
     
     let minHeaderHeight: CGFloat = 0;
     let maxHeaderHeight: CGFloat = 90;
@@ -28,7 +30,7 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
     var isInitialScroll = true; //to prevent header changing from initial hide status bar scroll
     
     func movieFetchComplete(movies: [Movie]) {
-        self.movieResults = movies;
+        self.movieResults.append(contentsOf: movies);
     }
     
     override func viewDidLoad() {
@@ -36,7 +38,7 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
         
         movieManager.delegate = self;
         setUpCollectionViewLayout();
-        movieManager.fetchPopularMovies();
+        movieManager.fetchPopularMovies(page: currentPageRequestNumber);
     }
     
     func setUpCollectionViewLayout() {
@@ -120,6 +122,11 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
         let isScrollingDown = scrollDiff > 0 && scrollView.contentOffset.y > absoluteTop
         let isScrollingUp = scrollDiff < 0 && scrollView.contentOffset.y < absoluteBottom
         
+        //refactor
+        if (scrollView.contentOffset.y == absoluteBottom) {
+            loadNextPage();
+        }
+        
         var newHeight = self.headerHeightConstraint.constant
         if isScrollingDown {
             newHeight = max(self.minHeaderHeight, self.headerHeightConstraint.constant - abs(scrollDiff))
@@ -132,5 +139,10 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
         }
         
         self.previousScrollOffset = scrollView.contentOffset.y
+    }
+    
+    func loadNextPage() {
+        currentPageRequestNumber = currentPageRequestNumber + 1;
+        movieManager.fetchPopularMovies(page: currentPageRequestNumber);
     }
 }
