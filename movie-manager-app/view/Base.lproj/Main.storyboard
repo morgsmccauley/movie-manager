@@ -49,11 +49,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xk1-aR-Rp1" userLabel="Header View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Popular" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYr-cv-FNY">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYr-cv-FNY">
                                         <rect key="frame" x="158" y="15" width="59" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -61,11 +60,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="dYr-cv-FNY" firstAttribute="centerX" secondItem="Xk1-aR-Rp1" secondAttribute="centerX" id="aRv-EV-uIm"/>
                                     <constraint firstAttribute="height" constant="50" id="dN7-D2-tvY" userLabel="Header Height Constraint"/>
+                                    <constraint firstItem="dYr-cv-FNY" firstAttribute="centerY" secondItem="Xk1-aR-Rp1" secondAttribute="centerY" id="o62-Gl-Y8C"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="C25-D7-GqH">
-                                <rect key="frame" x="0.0" y="50" width="375" height="568"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fwf-U4-Ay2">
                                     <size key="itemSize" width="181" height="255"/>
@@ -107,7 +108,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="C25-D7-GqH" secondAttribute="trailing" id="4Mq-ar-fxQ"/>
-                            <constraint firstItem="Xk1-aR-Rp1" firstAttribute="top" secondItem="ljM-Ad-a5b" secondAttribute="bottom" constant="-20" id="Ajh-Hq-anL"/>
+                            <constraint firstItem="Xk1-aR-Rp1" firstAttribute="top" secondItem="ljM-Ad-a5b" secondAttribute="bottom" id="Ajh-Hq-anL"/>
                             <constraint firstItem="Xk1-aR-Rp1" firstAttribute="leading" secondItem="lrM-DX-cA4" secondAttribute="leading" id="Jhu-4G-aB8"/>
                             <constraint firstItem="C25-D7-GqH" firstAttribute="top" secondItem="Xk1-aR-Rp1" secondAttribute="bottom" id="gZE-gF-NWO"/>
                             <constraint firstItem="C25-D7-GqH" firstAttribute="leading" secondItem="lrM-DX-cA4" secondAttribute="leading" id="uwn-uL-KT3"/>
