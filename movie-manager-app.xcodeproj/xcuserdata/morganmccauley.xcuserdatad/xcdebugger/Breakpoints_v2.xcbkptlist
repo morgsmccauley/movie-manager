@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "movie-manager-app/controller/MovieDiscoveryViewController.swift"
-            timestampString = "541142848.874447"
+            timestampString = "541145419.467037"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "movie-manager-app/controller/MovieDiscoveryViewController.swift"
-            timestampString = "541142848.8754179"
+            timestampString = "541145419.467778"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "movieFetchComplete(movies:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -21,6 +21,7 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
             }
         }
     };
+    var fetchInProgress = false;
     var currentPageRequestNumber = 1;
 //    var currentDiscoverySearchMethod: (MovieManager) -> (Int) -> () = MovieManager.fetchPopularMovies;
     
@@ -30,6 +31,7 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
     var isInitialScroll = true; //to prevent header changing from initial hide status bar scroll
     
     func movieFetchComplete(movies: [Movie]) {
+        fetchInProgress = false;
         self.movieResults.append(contentsOf: movies);
     }
     
@@ -114,34 +116,43 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
             return;
         }
         
-        let scrollDiff = scrollView.contentOffset.y - self.previousScrollOffset
-        
         let absoluteTop: CGFloat = 0;
         let absoluteBottom: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height;
         
+        let scrollDiff = scrollView.contentOffset.y - self.previousScrollOffset
+        
         let isScrollingDown = scrollDiff > 0 && scrollView.contentOffset.y > absoluteTop
         let isScrollingUp = scrollDiff < 0 && scrollView.contentOffset.y < absoluteBottom
+        let isAtBottom = scrollView.contentOffset.y == absoluteBottom; //make it load earlier
         
-        //refactor
-        if (scrollView.contentOffset.y == absoluteBottom) {
+        if (isAtBottom) {
             loadNextPage();
         }
         
-        var newHeight = self.headerHeightConstraint.constant
-        if isScrollingDown {
-            newHeight = max(self.minHeaderHeight, self.headerHeightConstraint.constant - abs(scrollDiff))
-        } else if isScrollingUp {
-            newHeight = min(self.maxHeaderHeight, self.headerHeightConstraint.constant + abs(scrollDiff))
-        }
-        
-        if newHeight != self.headerHeightConstraint.constant {
-            self.headerHeightConstraint.constant = newHeight
+        if (isScrollingUp || isScrollingDown) {
+            setHeaderHeight(diff: scrollDiff, isScrollingDown: isScrollingDown, isScrollingUp: isScrollingUp);
         }
         
         self.previousScrollOffset = scrollView.contentOffset.y
     }
     
+    func setHeaderHeight(diff: CGFloat, isScrollingDown: Bool, isScrollingUp: Bool) {
+        var newHeight = self.headerHeightConstraint.constant
+        
+        if (isScrollingDown) {
+            newHeight = max(self.minHeaderHeight, self.headerHeightConstraint.constant - abs(diff))
+        } else if (isScrollingUp) {
+            newHeight = min(self.maxHeaderHeight, self.headerHeightConstraint.constant + abs(diff))
+        }
+        
+        if newHeight != self.headerHeightConstraint.constant {
+            self.headerHeightConstraint.constant = newHeight
+        }
+    }
+    
     func loadNextPage() {
+        guard (!fetchInProgress) else { return; }
+        
         currentPageRequestNumber = currentPageRequestNumber + 1;
         movieManager.fetchPopularMovies(page: currentPageRequestNumber);
     }
