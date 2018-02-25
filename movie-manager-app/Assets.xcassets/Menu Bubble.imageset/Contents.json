@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "HeaderGradient.png",
+      "filename" : "Menu Bubble.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "HeaderGradient@2x.png",
+      "filename" : "Menu Bubble@2x.png",
       "scale" : "2x"
     },
     {

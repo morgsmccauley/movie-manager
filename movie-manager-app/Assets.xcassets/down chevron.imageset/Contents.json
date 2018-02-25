@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "HeaderGradient.png",
+      "filename" : "down chevron.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "HeaderGradient@2x.png",
+      "filename" : "down chevron@2x.png",
       "scale" : "2x"
     },
     {
@@ -18,8 +18,5 @@
   "info" : {
     "version" : 1,
     "author" : "xcode"
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }

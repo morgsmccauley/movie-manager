@@ -12,6 +12,15 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!;
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!;
+    @IBOutlet weak var movieGroupSelector: UIButton!
+    @IBOutlet weak var menuBubbleView: UIView!
+    @IBAction func onMovieGroupSelectorPressed(_ sender: Any) {
+        if (menuBubbleView.transform == .identity) {
+            closeMenuBubble();
+        } else {
+            openMenuBubble();
+        }
+    }
     
     let movieManager = MovieManager();
     var movieResults: [Movie] = [] {
@@ -33,6 +42,27 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
     func movieFetchComplete(movies: [Movie]) {
         fetchInProgress = false;
         self.movieResults.append(contentsOf: movies);
+    }
+    
+    func openMenuBubble() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.65, initialSpringVelocity: 0, options: [], animations: {
+            self.movieGroupSelector.imageView?.transform = CGAffineTransform(rotationAngle: CGFloat.pi);
+            self.menuBubbleView.transform = .identity;
+        });
+    }
+    
+    func closeMenuBubble() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.65, initialSpringVelocity: 0, options: [], animations: {
+            self.menuBubbleView.transform = CGAffineTransform(scaleX: 0, y: 0);
+            self.movieGroupSelector.imageView?.transform = .identity
+        });
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        self.movieGroupSelector.semanticContentAttribute = .forceRightToLeft;
+        
+        closeMenuBubble();
     }
     
     override func viewDidLoad() {
@@ -111,6 +141,10 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (self.menuBubbleView.transform == .identity) { //this will break if the user clears the button when is scrolling. only want to initiate when user is stationary, opens, then scrolls
+            closeMenuBubble();
+        }
+        
         if (isInitialScroll) {
             isInitialScroll = false;
             return;

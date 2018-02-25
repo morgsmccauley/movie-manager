@@ -95,22 +95,66 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HeaderGradient" translatesAutoresizingMaskIntoConstraints="NO" id="OMe-FS-iWt" userLabel="Gradient Image">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYr-cv-FNY">
-                                        <rect key="frame" x="156.5" y="10" width="62.5" height="21"/>
-                                        <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="18"/>
-                                        <color key="textColor" red="0.99192438469999999" green="0.99192438469999999" blue="0.99192438469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="txk-6j-39H">
+                                        <rect key="frame" x="122.5" y="9" width="130" height="22"/>
+                                        <state key="normal" title="Coming Soon" image="down chevron">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onMovieGroupSelectorPressed:" destination="Ykc-gJ-ipT" eventType="touchDown" id="ZRk-by-0m7"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTO-be-0G1">
+                                        <rect key="frame" x="115" y="36" width="145" height="122"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Menu Bubble" translatesAutoresizingMaskIntoConstraints="NO" id="e2m-tk-ufv">
+                                                <rect key="frame" x="0.0" y="0.0" width="145" height="122"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IX-zJ-fNq">
+                                                <rect key="frame" x="16" y="74" width="114" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="18"/>
+                                                <state key="normal" title="Coming Soon">
+                                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kj3-N6-wzf">
+                                                <rect key="frame" x="39" y="15" width="66" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="18"/>
+                                                <state key="normal" title="Popular">
+                                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkP-Vu-EXB">
+                                                <rect key="frame" x="30" y="44" width="86" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="18"/>
+                                                <state key="normal" title="Top Rated">
+                                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="145" id="JDG-4l-LOU"/>
+                                            <constraint firstAttribute="height" constant="122" id="wLM-Kc-BJt"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="OMe-FS-iWt" firstAttribute="height" secondItem="Xk1-aR-Rp1" secondAttribute="height" id="1iv-7q-h3O"/>
+                                    <constraint firstItem="txk-6j-39H" firstAttribute="centerX" secondItem="Xk1-aR-Rp1" secondAttribute="centerX" id="8Rn-WT-QkR"/>
                                     <constraint firstItem="OMe-FS-iWt" firstAttribute="width" secondItem="Xk1-aR-Rp1" secondAttribute="width" id="Eez-88-gwX"/>
+                                    <constraint firstItem="xTO-be-0G1" firstAttribute="centerX" secondItem="txk-6j-39H" secondAttribute="centerX" id="JrR-eu-96r"/>
                                     <constraint firstItem="OMe-FS-iWt" firstAttribute="top" secondItem="Xk1-aR-Rp1" secondAttribute="top" id="KGx-Eb-w07"/>
+                                    <constraint firstItem="txk-6j-39H" firstAttribute="centerY" secondItem="Xk1-aR-Rp1" secondAttribute="centerY" constant="-25" id="LYB-Kx-nQE"/>
                                     <constraint firstItem="OMe-FS-iWt" firstAttribute="leading" secondItem="Xk1-aR-Rp1" secondAttribute="leading" id="Uau-5O-czm"/>
-                                    <constraint firstItem="dYr-cv-FNY" firstAttribute="centerX" secondItem="Xk1-aR-Rp1" secondAttribute="centerX" id="aRv-EV-uIm"/>
                                     <constraint firstAttribute="height" constant="90" id="dN7-D2-tvY" userLabel="Header Height Constraint"/>
-                                    <constraint firstItem="dYr-cv-FNY" firstAttribute="centerY" secondItem="Xk1-aR-Rp1" secondAttribute="centerY" constant="-25" id="o62-Gl-Y8C"/>
+                                    <constraint firstItem="xTO-be-0G1" firstAttribute="top" secondItem="txk-6j-39H" secondAttribute="bottom" constant="5" id="iVG-dI-i1K"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -130,6 +174,8 @@
                         <outlet property="collectionView" destination="C25-D7-GqH" id="eo3-BW-gao"/>
                         <outlet property="flowLayout" destination="fwf-U4-Ay2" id="w6w-gb-UfA"/>
                         <outlet property="headerHeightConstraint" destination="dN7-D2-tvY" id="Iis-JU-yVx"/>
+                        <outlet property="menuBubbleView" destination="xTO-be-0G1" id="6k3-x3-ogF"/>
+                        <outlet property="movieGroupSelector" destination="txk-6j-39H" id="jSM-rV-CqR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D9a-Ty-IMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -255,7 +301,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="close">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="closeViewController:" destination="FS4-wf-7nX" eventType="touchUpInside" id="POu-QB-znZ"/>
@@ -269,7 +315,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="vwt-JN-Aku" firstAttribute="leading" secondItem="3kQ-OY-1n6" secondAttribute="leading" id="1CE-cw-33h"/>
                             <constraint firstAttribute="trailing" secondItem="vwt-JN-Aku" secondAttribute="trailing" id="3wH-LK-m79"/>
@@ -308,8 +354,10 @@
     </scenes>
     <resources>
         <image name="HeaderGradient" width="375" height="90"/>
+        <image name="Menu Bubble" width="138" height="127"/>
         <image name="close" width="50" height="50"/>
         <image name="discover" width="30" height="30"/>
+        <image name="down chevron" width="21" height="21"/>
         <image name="profile" width="30" height="30"/>
         <image name="search" width="30" height="30"/>
     </resources>
