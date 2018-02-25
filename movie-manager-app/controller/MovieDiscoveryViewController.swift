@@ -21,6 +21,16 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
             openMenuBubble();
         }
     }
+    @IBAction func onMenuItemPressed(_ sender: UIButton) {
+        if let pressedButton = sender.titleLabel?.text {
+            currentMovieGroup = pressedButton;
+            currentPageRequestNumber = 1;
+            movieResults = [];
+            menuItemMap?[pressedButton]?(currentPageRequestNumber);
+            movieGroupSelector.setTitle(pressedButton, for: UIControlState.normal);
+            closeMenuBubble();
+        }
+    }
     
     let movieManager = MovieManager();
     var movieResults: [Movie] = [] {
@@ -32,10 +42,11 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
     };
     var fetchInProgress = false;
     var currentPageRequestNumber = 1;
-//    var currentDiscoverySearchMethod: (MovieManager) -> (Int) -> () = MovieManager.fetchPopularMovies;
+    var menuItemMap: [String: (Int) -> ()]?;
+    var currentMovieGroup: String = "";
     
     let minHeaderHeight: CGFloat = 0;
-    let maxHeaderHeight: CGFloat = 90;
+    let maxHeaderHeight: CGFloat = 158;
     var previousScrollOffset:CGFloat = 0;
     var isInitialScroll = true; //to prevent header changing from initial hide status bar scroll
     
@@ -67,6 +78,12 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+        menuItemMap = [
+            "Popular": movieManager.fetchPopularMovies,
+            "Top Rated": movieManager.fetchTopRatedMovies,
+            "Coming Soon": movieManager.fetchComingSoonMovies
+        ]; //need to load once model is initialised, is there a better way?
         
         movieManager.delegate = self;
         setUpCollectionViewLayout();
@@ -188,6 +205,6 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
         guard (!fetchInProgress) else { return; }
         
         currentPageRequestNumber = currentPageRequestNumber + 1;
-        movieManager.fetchPopularMovies(page: currentPageRequestNumber);
+        menuItemMap?[currentMovieGroup]?(currentPageRequestNumber);
     }
 }

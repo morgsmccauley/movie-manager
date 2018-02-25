@@ -20,8 +20,17 @@ class MovieManager{
     public var delegate: MovieManagerDelegate?;
     
     public func fetchPopularMovies(page: Int) {
-        print("fetch popular");
         let popularRequestEndpoint = "https://api.themoviedb.org/3/movie/popular?api_key=\(API_KEY)&language=en-US&page=\(String(page))";
+        makeMovieRequest(with: popularRequestEndpoint);
+    }
+    
+    public func fetchTopRatedMovies(page: Int) {
+        let popularRequestEndpoint = "https://api.themoviedb.org/3/movie/top_rated?api_key=\(API_KEY)&language=en-US&page=\(String(page))";
+        makeMovieRequest(with: popularRequestEndpoint);
+    }
+    
+    public func fetchComingSoonMovies(page: Int) {
+        let popularRequestEndpoint = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(API_KEY)&language=en-US&page=\(String(page))";
         makeMovieRequest(with: popularRequestEndpoint);
     }
     
