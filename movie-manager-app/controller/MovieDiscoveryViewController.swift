@@ -87,7 +87,7 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
         
         movieManager.delegate = self;
         setUpCollectionViewLayout();
-        currentMovieGroup = "Popular";
+        currentMovieGroup = "Popular"; //use outlet to set this value
         movieManager.fetchPopularMovies(page: currentPageRequestNumber);
     }
     
@@ -140,6 +140,10 @@ extension MovieDiscoveryViewController: UICollectionViewDataSource {
 }
 
 extension MovieDiscoveryViewController: UICollectionViewDelegate {
+    func point(inside point: CGPoint, with event: UIEvent?) {
+        print("touched");
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "MovieDetailSegue" else { return; }
         
