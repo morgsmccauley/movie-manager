@@ -83,10 +83,11 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
             "Popular": movieManager.fetchPopularMovies,
             "Top Rated": movieManager.fetchTopRatedMovies,
             "Coming Soon": movieManager.fetchComingSoonMovies
-        ]; //need to load once model is initialised, is there a better way?
+        ];
         
         movieManager.delegate = self;
         setUpCollectionViewLayout();
+        currentMovieGroup = "Popular";
         movieManager.fetchPopularMovies(page: currentPageRequestNumber);
     }
     
