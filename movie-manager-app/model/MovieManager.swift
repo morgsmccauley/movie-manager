@@ -14,8 +14,10 @@ protocol MovieManagerDelegate {
 }
 
 private let API_KEY = "e2ee42fbd9d45fd431771c42d0bda8cd";
+private let DEFAULT_MOVIE_STRING_VALUE = "Undefined";
+private let DEFAULT_MOVIE_INT_VALUE = -1;
 
-class MovieManager{
+class MovieManager {
     
     public var delegate: MovieManagerDelegate?;
     
@@ -60,135 +62,64 @@ class MovieManager{
 
     public func fetchImage(path: String, completionHandler: @escaping ((UIImage?) -> ())) {
         let imageEndpoint = "https://image.tmdb.org/t/p/w500\(path)";
-        guard let endpointUrl = URL(string: imageEndpoint) else {
-            return;
-        }
-
-        let task = URLSession.shared.dataTask(with: endpointUrl) { (data, response, error) in
-            let image = UIImage(data: data!)
-            completionHandler(image)
-        }
-        task.resume();
-    }
-
-    private var resultsTotal: Int = -1;
-    private var movieResults: [Movie] = [] {
-        didSet {
-            let allRequestsComplete = movieResults.count == resultsTotal;
-            if (allRequestsComplete) {
-                print("return results")
-                delegate?.movieFetchComplete(movies: movieResults);
-
-                resetMovieFetchParameters();
-            }
+        
+        HTTPHandler.getJson(urlString: imageEndpoint) { data in
+            completionHandler(UIImage(data: data!))
         }
     }
-
-    private func resetMovieFetchParameters() {
-        resultsTotal = -1;
-        movieResults = [];
-    }
-
-    private func addMovieDetails(movies: [Movie]) {
-        for movie in movies {
-            let movieDetailsEndpoint = "https://api.themoviedb.org/3/movie/\(movie.id)?api_key=\(API_KEY)&language=en-US";
-
-            guard let movieDetailsUrl = URL(string: movieDetailsEndpoint) else {
-                print("ERROR: cannot convert endpoint to url");
-                delegate?.movieFetchComplete(movies: []);
-
-                return;
-            }
-
-            URLSession.shared.dataTask(with: movieDetailsUrl, completionHandler: { [weak self] (data, response, error) in
-                if let data = data,
-                   let jsonResponse = try? JSONSerialization.jsonObject(with: data) as! [String: AnyObject],
-                   let movie = self?.setFullDetailsFor(movie: movie, with: jsonResponse) {
-
-                    self?.movieResults.append(movie);
-                } else {
-                    self?.delegate?.movieFetchComplete(movies: []);
-                }
-            }).resume();
+    
+    public func appendMovieDetails(movie: Movie, completionHandler: @escaping ((Movie?) -> ())) {
+        let movieDetailsEndpoint = "https://api.themoviedb.org/3/movie/\(movie.id)?api_key=\(API_KEY)&language=en-US";
+        
+        HTTPHandler.getJson(urlString: movieDetailsEndpoint) { [weak self] data in
+            let movieWithDetails = self?.mapMovieDetails(movie, JSONParser.parse(data!)!);
+            completionHandler(movieWithDetails);
         }
-    }
-
-    private func setFullDetailsFor(movie: Movie, with data: [String: AnyObject]) -> Movie {
-        let fullDetailMovie = movie;
-
-        if let genres = parseAndFormat(dataObject: data["genres"]) {
-            fullDetailMovie.genres = genres;
-        }
-
-        if let company = parseAndFormat(dataObject: data["production_companies"]) {
-            fullDetailMovie.company = company;
-        }
-
-        if let budget = data["budget"] {
-            fullDetailMovie.budget = String(describing: budget);
-        }
-
-        if let runtime = data["runtime"] {
-            fullDetailMovie.runtime = String(describing: runtime);
-        }
-
-        return fullDetailMovie;
-    }
-
-    private func parseAndFormat(dataObject: AnyObject?) -> String? {
-        var formattedString: String = "";
-
-        if let jsonMap = dataObject as? [AnyObject] {
-            for  object in jsonMap {
-                if let jsonObject = object as? [String: AnyObject] {
-                    formattedString += "\(jsonObject["name"]!) - ";
-                }
-            }
-        }
-
-        return formattedString;
-    }
-
-    private func makeWebRequest(endpoint: URL, completionHandler: String) {
-
     }
 
     private func makeMovieRequest(with endpoint: String) {
-        let endpointUrl = URL.init(string: endpoint)!;
-        URLSession.shared.dataTask(with: endpointUrl, completionHandler: { [weak self] (data, response, error) in
-            guard let jsonResponse = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: AnyObject],
-                let movieJson = jsonResponse["results"] as? [[String: AnyObject]] else {
-                    print("ERROR: could not covert search response to JSON");
-                    self?.delegate?.movieFetchComplete(movies: [])
-
-                    return;
-            }
-
-            if let parsedMovieResults = self?.setInitialMovieDataFrom(json: movieJson) {
-                self?.resultsTotal = parsedMovieResults.count
-                self?.addMovieDetails(movies: parsedMovieResults);
-
-                return;
-            }
-
-            print("ERROR: failed to parse movie results");
-            self?.delegate?.movieFetchComplete(movies: []);
-        }).resume();
+        HTTPHandler.getJson(urlString: endpoint) { [weak self] data in
+            guard let movieJson = JSONParser.parse(data!)!["results"] as? [[String: AnyObject]] else { return; }
+            
+            let movieResults = self?.createMovieListFrom(json: movieJson) ?? [];
+            self?.delegate?.movieFetchComplete(movies: movieResults)
+        }
     }
 
-    private func setInitialMovieDataFrom(json movieJson: [[String: AnyObject]]) -> [Movie] {
+    private func createMovieListFrom(json movieJsonArray: [[String: AnyObject]]) -> [Movie] {
         var movies: [Movie] = [];
 
-        for movie in movieJson {
-            movies.append(Movie(id: movie["id"] as? Int ?? -1,
-                                title: movie["title"] as? String ?? "",
-                                posterPath: movie["poster_path"] as? String ?? "",
-                                backdropPath: movie["backdrop_path"] as? String ?? "",
-                                releaseDate: movie["release_date"] as? String ?? "",
-                                overview: movie["overview"] as? String ?? "",
-                                popularity: String(describing: movie["popularity"])));
+        for movieObject in movieJsonArray {
+            movies.append(mapMovie(movieObject));
         }
 
         return movies;
+    }
+    
+    private func mapMovie(_ object: [String: AnyObject]) -> Movie {
+        let id = object["id"] as? Int ?? DEFAULT_MOVIE_INT_VALUE,
+        title = object["title"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
+        posterPath = object["poster_path"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
+        backdropPath = object["backdrop_path"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
+        releaseDate = object["release_date"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
+        overview = object["overview"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
+        popularity = object["popularity"] as? String ?? DEFAULT_MOVIE_STRING_VALUE;
+        
+        return Movie(id: id, title: title, posterPath: posterPath, backdropPath: backdropPath, releaseDate: releaseDate, overview: overview, popularity: popularity);
+    }
+    
+    private func mapMovieDetails(_ movie: Movie, _ object: [String: AnyObject]) -> Movie {
+        let genres = object["genres"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
+        company = object["production_companies"] as? String ?? DEFAULT_MOVIE_STRING_VALUE, //these are lists
+        budget = object["budget"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
+        runtime = object["runtime"] as? String ?? DEFAULT_MOVIE_STRING_VALUE;
+        
+        var movieWithDetails = movie;
+        movieWithDetails.genres = genres;
+        movieWithDetails.company = company;
+        movieWithDetails.budget = budget;
+        movieWithDetails.runtime = runtime;
+        
+        return movieWithDetails;
     }
 }

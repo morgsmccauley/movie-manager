@@ -116,6 +116,7 @@ extension MovieDiscoveryViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCollectionViewCell", for: indexPath) as! MovieCollectionViewCell;
+        cell.moviePoster.image = nil;
         getMoviePoster(movieIndex: indexPath.row, cell: cell);
 
         return cell;
