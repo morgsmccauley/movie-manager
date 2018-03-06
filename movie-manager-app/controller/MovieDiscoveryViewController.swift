@@ -180,7 +180,7 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
         
         let isScrollingDown = scrollDiff > 0 && scrollView.contentOffset.y > absoluteTop
         let isScrollingUp = scrollDiff < 0 && scrollView.contentOffset.y < absoluteBottom
-        let isAtBottom = scrollView.contentOffset.y == absoluteBottom; //make it load earlier
+        let isAtBottom = scrollView.contentOffset.y > absoluteBottom / 2;
         
         if (isAtBottom) {
             loadNextPage();
@@ -209,6 +209,7 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
     
     func loadNextPage() {
         guard (!fetchInProgress) else { return; }
+        fetchInProgress = true;
         
         currentPageRequestNumber = currentPageRequestNumber + 1;
         menuItemMap?[currentMovieGroup]?(currentPageRequestNumber);
