@@ -15,7 +15,7 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var rating: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var overview: UILabel!
-    @IBOutlet weak var releaseYear: UILabel!
+    @IBOutlet weak var releaseDate: UILabel!
     @IBOutlet weak var runtime: UILabel!
     @IBOutlet weak var castCollectionView: UICollectionView!
     @IBOutlet weak var reviewTableView: UITableView!
@@ -29,7 +29,7 @@ class MovieDetailViewController: UIViewController {
         didSet {
             self.name.text = movie.title;
             self.overview.text = movie.overview;
-            self.releaseYear.text = movie.releaseDate;
+            self.releaseDate.text = movie.releaseDate;
             self.runtime.text = movie.runtime;
             
             print(movie);
