@@ -102,8 +102,6 @@
 			children = (
 				243AADC21F108BE7009C0730 /* MovieManager.swift */,
 				243AADC41F108BF0009C0730 /* Movie.swift */,
-				2497A33F204D2606008A6D38 /* JSONParser.swift */,
-				2497A341204D26AD008A6D38 /* HTTPHandler.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -126,6 +124,15 @@
 				24010B6F1F3AF56300F14FA9 /* MovieDetailViewController.swift */,
 			);
 			path = controller;
+			sourceTree = "<group>";
+		};
+		248B0806204F3874004B6725 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				2497A33F204D2606008A6D38 /* JSONParser.swift */,
+				2497A341204D26AD008A6D38 /* HTTPHandler.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		24ED45B71F0CAC56004D55CF = {
@@ -152,6 +159,7 @@
 		24ED45C21F0CAC56004D55CF /* movie-manager-app */ = {
 			isa = PBXGroup;
 			children = (
+				248B0806204F3874004B6725 /* Utility */,
 				24F87E8E204112660032189C /* fonts */,
 				2452ED9C203EA5490026D96C /* controller */,
 				2452ED9B203EA5430026D96C /* view */,

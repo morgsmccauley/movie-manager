@@ -10,8 +10,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue-Bold</string>
+        <array key="Raleway-Bold.ttf">
+            <string>Raleway-Bold</string>
         </array>
         <array key="Raleway-Medium.ttf">
             <string>Raleway-Medium</string>
@@ -68,7 +68,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="181" height="255"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F8t-xf-d7J">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suicide-squad-poster" translatesAutoresizingMaskIntoConstraints="NO" id="F8t-xf-d7J">
                                                     <rect key="frame" x="0.0" y="0.0" width="181" height="255"/>
                                                 </imageView>
                                             </subviews>
@@ -212,7 +212,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="169.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kex-Hp-4W7">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="suicide-squad-poster" translatesAutoresizingMaskIntoConstraints="NO" id="Kex-Hp-4W7">
                                             <rect key="frame" x="8" y="8" width="100" height="150"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -292,14 +292,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="overview" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Si-0c-vxb">
-                                <rect key="frame" x="8" y="323" width="359" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The most dangerous former operative of the CIA is drawn out of hiding to uncover hidden truths about his past." textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Si-0c-vxb">
+                                <rect key="frame" x="15" y="406" width="353" height="60"/>
+                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vwt-JN-Aku">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suicide-squad-backdrop" translatesAutoresizingMaskIntoConstraints="NO" id="vwt-JN-Aku">
                                 <rect key="frame" x="0.0" y="-2" width="375" height="211"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vwt-JN-Aku" secondAttribute="height" multiplier="375:211" id="Bf9-xc-Wxl"/>
@@ -316,18 +315,117 @@
                                     <action selector="closeViewController:" destination="FS4-wf-7nX" eventType="touchUpInside" id="POu-QB-znZ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZV-72-jXu">
-                                <rect key="frame" x="8" y="276" width="359" height="39"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suicide Squad" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZV-72-jXu">
+                                <rect key="frame" x="153" y="219" width="159" height="28"/>
+                                <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suicide-squad-poster" translatesAutoresizingMaskIntoConstraints="NO" id="8SG-hM-vi2">
+                                <rect key="frame" x="15" y="163" width="125" height="183"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="mh1-Nv-1ud"/>
+                                    <constraint firstAttribute="height" constant="182.5" id="qWQ-w2-URL"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yG-30-Yax">
+                                <rect key="frame" x="15" y="376" width="353" height="20"/>
+                                <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypI-uC-EFi">
+                                <rect key="frame" x="15" y="496" width="349" height="20"/>
+                                <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u5b-LV-n9E">
+                                <rect key="frame" x="15" y="606" width="349" height="20"/>
+                                <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2hr 40min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2l-RN-UQN">
+                                <rect key="frame" x="153" y="286.5" width="79" height="20"/>
+                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgF-CI-WYo">
+                                <rect key="frame" x="153" y="256.5" width="36.5" height="20"/>
+                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="odS-sl-xOJ">
+                                <rect key="frame" x="15" y="526" width="349" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="9jR-nF-hFO"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Yem-cH-r4a">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="XeQ-JR-EMD">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dzc-x1-D2u">
+                                <rect key="frame" x="15" y="636" width="349" height="66"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3c-ha-Z4z">
+                                <rect key="frame" x="153" y="316.5" width="49" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.99192438469999999" green="0.99192438469999999" blue="0.99192438469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="vwt-JN-Aku" firstAttribute="leading" secondItem="3kQ-OY-1n6" secondAttribute="leading" id="1CE-cw-33h"/>
-                            <constraint firstAttribute="trailing" secondItem="vwt-JN-Aku" secondAttribute="trailing" id="3wH-LK-m79"/>
+                            <constraint firstItem="8SG-hM-vi2" firstAttribute="top" secondItem="3kQ-OY-1n6" secondAttribute="top" constant="163" id="0B4-0D-nR8"/>
+                            <constraint firstItem="8Si-0c-vxb" firstAttribute="top" secondItem="5yG-30-Yax" secondAttribute="bottom" constant="10" id="0YQ-ZZ-Frt"/>
+                            <constraint firstAttribute="trailing" secondItem="8Si-0c-vxb" secondAttribute="trailing" constant="7" id="3Bw-y0-Jr6"/>
+                            <constraint firstItem="MgF-CI-WYo" firstAttribute="top" secondItem="LZV-72-jXu" secondAttribute="bottom" constant="10" id="4pC-KY-t3Z"/>
+                            <constraint firstAttribute="trailing" secondItem="u5b-LV-n9E" secondAttribute="trailing" constant="11" id="7un-Cc-nm8"/>
+                            <constraint firstItem="B3c-ha-Z4z" firstAttribute="leading" secondItem="8SG-hM-vi2" secondAttribute="trailing" constant="13" id="DeC-OV-pba"/>
+                            <constraint firstAttribute="trailing" secondItem="5yG-30-Yax" secondAttribute="trailing" constant="7" id="Fpi-U8-GZN"/>
+                            <constraint firstItem="vwt-JN-Aku" firstAttribute="width" secondItem="3kQ-OY-1n6" secondAttribute="width" id="Hfr-0h-raL"/>
+                            <constraint firstItem="vwt-JN-Aku" firstAttribute="leading" secondItem="3kQ-OY-1n6" secondAttribute="leading" id="JeE-mT-GTF"/>
+                            <constraint firstAttribute="bottom" secondItem="Dzc-x1-D2u" secondAttribute="bottom" constant="8" id="MWx-2D-yYe"/>
+                            <constraint firstItem="LZV-72-jXu" firstAttribute="top" secondItem="vwt-JN-Aku" secondAttribute="bottom" constant="10" id="NJ2-ZE-hOw"/>
+                            <constraint firstItem="Dzc-x1-D2u" firstAttribute="leading" secondItem="3kQ-OY-1n6" secondAttribute="leading" constant="15" id="Rmj-1b-UhV"/>
+                            <constraint firstItem="l2l-RN-UQN" firstAttribute="leading" secondItem="8SG-hM-vi2" secondAttribute="trailing" constant="13" id="SGd-BQ-WpW"/>
+                            <constraint firstItem="u5b-LV-n9E" firstAttribute="leading" secondItem="3kQ-OY-1n6" secondAttribute="leading" constant="15" id="TEa-WE-Obo"/>
+                            <constraint firstItem="Dzc-x1-D2u" firstAttribute="top" secondItem="u5b-LV-n9E" secondAttribute="bottom" constant="10" id="UYV-xv-jDb"/>
+                            <constraint firstItem="5yG-30-Yax" firstAttribute="top" secondItem="8SG-hM-vi2" secondAttribute="bottom" constant="30" id="UZ8-hL-iRa"/>
+                            <constraint firstItem="ypI-uC-EFi" firstAttribute="leading" secondItem="3kQ-OY-1n6" secondAttribute="leading" constant="15" id="UmH-gL-046"/>
+                            <constraint firstItem="LZV-72-jXu" firstAttribute="leading" secondItem="8SG-hM-vi2" secondAttribute="trailing" constant="13" id="Uu8-MT-UfN"/>
+                            <constraint firstItem="8SG-hM-vi2" firstAttribute="leading" secondItem="3kQ-OY-1n6" secondAttribute="leading" constant="15" id="XRG-aj-uZg"/>
+                            <constraint firstItem="ypI-uC-EFi" firstAttribute="top" secondItem="8Si-0c-vxb" secondAttribute="bottom" constant="30" id="drd-qD-jRN"/>
+                            <constraint firstItem="MgF-CI-WYo" firstAttribute="leading" secondItem="8SG-hM-vi2" secondAttribute="trailing" constant="13" id="eTY-W7-wPo"/>
+                            <constraint firstAttribute="trailing" secondItem="odS-sl-xOJ" secondAttribute="trailing" constant="11" id="fpt-O4-cif"/>
+                            <constraint firstItem="u5b-LV-n9E" firstAttribute="top" secondItem="odS-sl-xOJ" secondAttribute="bottom" constant="30" id="gas-Ew-bpf"/>
+                            <constraint firstAttribute="trailing" secondItem="Dzc-x1-D2u" secondAttribute="trailing" constant="11" id="gfs-kF-j5M"/>
+                            <constraint firstItem="odS-sl-xOJ" firstAttribute="leading" secondItem="3kQ-OY-1n6" secondAttribute="leading" constant="15" id="haS-KZ-Txi"/>
+                            <constraint firstItem="l2l-RN-UQN" firstAttribute="top" secondItem="MgF-CI-WYo" secondAttribute="bottom" constant="10" id="jE0-Fg-cyy"/>
+                            <constraint firstItem="8Si-0c-vxb" firstAttribute="leading" secondItem="3kQ-OY-1n6" secondAttribute="leading" constant="15" id="jVU-Sv-Zib"/>
+                            <constraint firstItem="odS-sl-xOJ" firstAttribute="top" secondItem="ypI-uC-EFi" secondAttribute="bottom" constant="10" id="lsj-dA-gUK"/>
+                            <constraint firstItem="vwt-JN-Aku" firstAttribute="top" secondItem="neg-6q-7zd" secondAttribute="bottom" constant="-22" id="o3y-Jr-PAP"/>
+                            <constraint firstItem="5yG-30-Yax" firstAttribute="leading" secondItem="3kQ-OY-1n6" secondAttribute="leading" constant="15" id="tjF-GI-zxZ"/>
+                            <constraint firstItem="B3c-ha-Z4z" firstAttribute="top" secondItem="l2l-RN-UQN" secondAttribute="bottom" constant="10" id="ujf-uC-PuA"/>
+                            <constraint firstAttribute="trailing" secondItem="ypI-uC-EFi" secondAttribute="trailing" constant="11" id="yPa-cA-5Tb"/>
                         </constraints>
                     </view>
                     <connections>
@@ -338,7 +436,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qlo-7n-bha" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2775" y="331"/>
+            <point key="canvasLocation" x="2773.5999999999999" y="330.58470764617692"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="hTP-az-8ln">
@@ -348,7 +446,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="20I-XS-ZKh">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="Pua-Lg-8bx" kind="relationship" relationship="viewControllers" id="nxM-0V-yKu"/>
@@ -369,5 +467,7 @@
         <image name="down chevron" width="21" height="21"/>
         <image name="profile" width="30" height="30"/>
         <image name="search" width="30" height="30"/>
+        <image name="suicide-squad-backdrop" width="500" height="281"/>
+        <image name="suicide-squad-poster" width="500" height="750"/>
     </resources>
 </document>

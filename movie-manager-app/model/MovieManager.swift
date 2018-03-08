@@ -81,8 +81,8 @@ class MovieManager {
         HTTPHandler.getJson(urlString: endpoint) { [weak self] data in
             guard let movieJson = JSONParser.parse(data!)!["results"] as? [[String: AnyObject]] else { return; }
             
-            let movieResults = self?.createMovieListFrom(json: movieJson) ?? [];
-            self?.delegate?.movieFetchComplete(movies: movieResults)
+            let movieResults = self?.createMovieListFrom(json: movieJson);
+            self?.delegate?.movieFetchComplete(movies: movieResults!)
         }
     }
 
