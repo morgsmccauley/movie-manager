@@ -97,12 +97,12 @@ class MovieManager {
     }
     
     private func mapMovie(_ object: [String: AnyObject]) -> Movie {
-        let id = object["id"] as? Int ?? DEFAULT_MOVIE_INT_VALUE,
-        title = object["title"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
-        posterPath = object["poster_path"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
-        backdropPath = object["backdrop_path"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
-        releaseDate = object["release_date"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
-        overview = object["overview"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
+        let id = object["id"] as! Int,
+        title = object["title"] as! String,
+        posterPath = object["poster_path"] as! String,
+        backdropPath = object["backdrop_path"] as! String,
+        releaseDate = object["release_date"] as! String,
+        overview = object["overview"] as! String,
         popularity = object["popularity"] as? String ?? DEFAULT_MOVIE_STRING_VALUE;
         
         return Movie(id: id, title: title, posterPath: posterPath, backdropPath: backdropPath, releaseDate: releaseDate, overview: overview, popularity: popularity);
@@ -111,8 +111,8 @@ class MovieManager {
     private func mapMovieDetails(_ movie: Movie, _ object: [String: AnyObject]) -> Movie {
         let genres = object["genres"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
         company = object["production_companies"] as? String ?? DEFAULT_MOVIE_STRING_VALUE, //these are lists
-        budget = object["budget"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
-        runtime = object["runtime"] as? String ?? DEFAULT_MOVIE_STRING_VALUE;
+        budget = String(describing: object["budget"]!),
+        runtime = String(describing: object["runtime"]!);
         
         var movieWithDetails = movie;
         movieWithDetails.genres = genres;

@@ -10,24 +10,29 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
   
-    @IBOutlet weak var movieImage: UIImageView! //need to set height for this
-    @IBOutlet weak var movieTitle: UILabel!
-    @IBOutlet weak var movieOverview: UILabel!
+    @IBOutlet weak var poster: UIImageView!
+    @IBOutlet weak var backdrop: UIImageView!
+    @IBOutlet weak var rating: UILabel!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var overview: UILabel!
+    @IBOutlet weak var releaseYear: UILabel!
+    @IBOutlet weak var runtime: UILabel!
+    @IBOutlet weak var castCollectionView: UICollectionView!
+    @IBOutlet weak var reviewTableView: UITableView!
+    
     
     @IBAction func closeViewController(_ sender: Any) {
         self.dismiss(animated: true, completion: nil);
     }
     
-    var movie: Movie? {
+    var movie: Movie! {
         didSet {
-            movieTitle?.text = movie?.title;
-            movieOverview?.text = movie?.overview;
+            self.name.text = movie.title;
+            self.overview.text = movie.overview;
+            self.releaseYear.text = movie.releaseDate;
+            self.runtime.text = movie.runtime;
+            
+            print(movie);
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad();
-        let _ = self.view; //force the view to load its outlets.
-    }
-
 }

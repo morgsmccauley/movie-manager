@@ -140,26 +140,65 @@ extension MovieDiscoveryViewController: UICollectionViewDataSource {
 }
 
 extension MovieDiscoveryViewController: UICollectionViewDelegate {
-    func point(inside point: CGPoint, with event: UIEvent?) {
-        print("touched");
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "MovieDetailSegue" else { return; }
         
         if let cell = sender as? MovieCollectionViewCell,
             let indexPath = self.collectionView!.indexPath(for: cell),
-            let destination = segue.destination as? MovieDetailViewController {
+            let destination = segue.destination as? MovieDetailViewController,
+            let _ = destination.view { //force view to load outlets
             
-            destination.movie = movieResults[(indexPath as NSIndexPath).row];
+            getMovieDetails(movieIndex: (indexPath as NSIndexPath).row, destination);
+            getMoviePoster(movieIndex: (indexPath as NSIndexPath).row, destination);
+            getMovieBackdrop(movieIndex: (indexPath as NSIndexPath).row, destination);
             
-            let backdropPath = movieResults[(indexPath as NSIndexPath).row].backdropPath;
-            movieManager.fetchImage(path: backdropPath) { returnedBackdrop in
+//            destination.movie = movieResults[(indexPath as NSIndexPath).row];
+//            let backdropPath = movieResults[(indexPath as NSIndexPath).row].backdropPath;
+//            movieManager.fetchImage(path: backdropPath) { returnedBackdrop in
+//                DispatchQueue.main.async {
+//                    destination.movieImage?.image = returnedBackdrop;
+//                }
+//            }
+        }
+    }
+    
+    func getMoviePoster(movieIndex: Int, _ destination: MovieDetailViewController) {
+        let movie = movieResults[movieIndex];
+        
+        if let poster = movie.poster {
+            destination.poster.image = poster;
+        } else {
+            movieManager.fetchImage(path: movie.posterPath) { [weak self] poster in
                 DispatchQueue.main.async {
-                    destination.movieImage?.image = returnedBackdrop;
+                    destination.poster.image = poster;
                 }
+                self?.movieResults[movieIndex].poster = poster;
             }
-            
+        }
+    }
+    
+    func getMovieBackdrop(movieIndex: Int, _ destination: MovieDetailViewController) {
+        let movie = movieResults[movieIndex];
+        
+        if let backdrop = movie.backdrop {
+            destination.backdrop.image = backdrop;
+        } else {
+            movieManager.fetchImage(path: movie.backdropPath) { [weak self] backdrop in
+                DispatchQueue.main.async {
+                    destination.backdrop.image = backdrop;
+                }
+                self?.movieResults[movieIndex].backdrop = backdrop;
+            }
+        }
+    }
+    
+    func getMovieDetails(movieIndex: Int, _ destination: MovieDetailViewController) {
+        //cache results
+        movieManager.appendMovieDetails(movie: movieResults[movieIndex]) { movieWithDetails in
+            DispatchQueue.main.async {
+                destination.movie = movieWithDetails!;
+            }
         }
     }
     

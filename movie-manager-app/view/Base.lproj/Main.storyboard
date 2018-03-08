@@ -288,11 +288,11 @@
                         <viewControllerLayoutGuide type="top" id="neg-6q-7zd"/>
                         <viewControllerLayoutGuide type="bottom" id="box-yo-44c"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3kQ-OY-1n6">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="3kQ-OY-1n6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The most dangerous former operative of the CIA is drawn out of hiding to uncover hidden truths about his past." textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Si-0c-vxb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The most dangerous former operative of the CIA is drawn out of hiding to uncover hidden truths about his past." lineBreakMode="wordWrap" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Si-0c-vxb">
                                 <rect key="frame" x="15" y="406" width="353" height="60"/>
                                 <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -316,8 +316,8 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suicide Squad" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZV-72-jXu">
-                                <rect key="frame" x="153" y="219" width="159" height="28"/>
-                                <fontDescription key="fontDescription" name="Raleway-Bold" family="Raleway" pointSize="23"/>
+                                <rect key="frame" x="153" y="219" width="154.5" height="28"/>
+                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -429,9 +429,15 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="movieImage" destination="vwt-JN-Aku" id="L4G-YB-IuT"/>
-                        <outlet property="movieOverview" destination="8Si-0c-vxb" id="a4P-dc-Gec"/>
-                        <outlet property="movieTitle" destination="LZV-72-jXu" id="EWI-tc-esn"/>
+                        <outlet property="backdrop" destination="vwt-JN-Aku" id="CPS-bt-Puk"/>
+                        <outlet property="castCollectionView" destination="odS-sl-xOJ" id="bGd-wF-aGz"/>
+                        <outlet property="name" destination="LZV-72-jXu" id="MxN-HJ-HvS"/>
+                        <outlet property="overview" destination="8Si-0c-vxb" id="ayr-v2-93O"/>
+                        <outlet property="poster" destination="8SG-hM-vi2" id="Hjb-Gp-lP9"/>
+                        <outlet property="rating" destination="B3c-ha-Z4z" id="aBk-6u-Hgq"/>
+                        <outlet property="releaseYear" destination="MgF-CI-WYo" id="sgx-C1-GIB"/>
+                        <outlet property="reviewTableView" destination="Dzc-x1-D2u" id="ktC-FX-rKe"/>
+                        <outlet property="runtime" destination="l2l-RN-UQN" id="l4q-Vj-Ql7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qlo-7n-bha" userLabel="First Responder" sceneMemberID="firstResponder"/>
