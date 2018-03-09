@@ -128,11 +128,16 @@ class MovieManager {
         title = object["title"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
         posterPath = object["poster_path"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
         backdropPath = object["backdrop_path"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
-        releaseDate = object["release_date"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
+        releaseDate = getYearFromFull(date: object["release_date"] as! String) ?? DEFAULT_MOVIE_STRING_VALUE,
         overview = object["overview"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
         popularity = object["popularity"] as? String ?? DEFAULT_MOVIE_STRING_VALUE;
         
         return Movie(id: id, title: title, posterPath: posterPath, backdropPath: backdropPath, releaseDate: releaseDate, overview: overview, popularity: popularity);
+    }
+    
+    private func getYearFromFull(date: String) -> String? {
+        guard let dashIndex = date.index(of: "-") else { return nil; }
+        return String(date[...date.index(before: dashIndex)]);
     }
     
     private func mapMovieDetails(_ movie: Movie, _ object: [String: AnyObject]) -> Movie {
