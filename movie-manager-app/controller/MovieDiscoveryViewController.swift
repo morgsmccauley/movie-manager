@@ -152,14 +152,6 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
             getMovieDetails(movieIndex: (indexPath as NSIndexPath).row, destination);
             getMoviePoster(movieIndex: (indexPath as NSIndexPath).row, destination);
             getMovieBackdrop(movieIndex: (indexPath as NSIndexPath).row, destination);
-            
-//            destination.movie = movieResults[(indexPath as NSIndexPath).row];
-//            let backdropPath = movieResults[(indexPath as NSIndexPath).row].backdropPath;
-//            movieManager.fetchImage(path: backdropPath) { returnedBackdrop in
-//                DispatchQueue.main.async {
-//                    destination.movieImage?.image = returnedBackdrop;
-//                }
-//            }
         }
     }
     
