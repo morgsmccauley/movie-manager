@@ -139,7 +139,7 @@ class MovieManager {
         let genres = object["genres"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
         company = object["production_companies"] as? String ?? DEFAULT_MOVIE_STRING_VALUE, //these are lists
         budget = String(describing: object["budget"]!),
-        runtime = String(describing: object["runtime"]!);
+        runtime = convertMinsToHourMinString(object["runtime"] as! Double);
         
         var movieWithDetails = movie;
         movieWithDetails.genres = genres;
@@ -148,5 +148,12 @@ class MovieManager {
         movieWithDetails.runtime = runtime;
         
         return movieWithDetails;
+    }
+    
+    private func convertMinsToHourMinString(_ runtime: Double) -> String {
+        let hours = floor(runtime / 60);
+        let mins = runtime - (hours * 60);
+        
+        return "\(Int(hours))hr \(Int(mins))min";
     }
 }
