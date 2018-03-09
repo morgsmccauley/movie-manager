@@ -76,6 +76,33 @@ class MovieManager {
             completionHandler(movieWithDetails);
         }
     }
+    
+    public func fetchCast(movieId: Int, completionHandler: @escaping (([Actor]?) -> ())) {
+        let movieCastEndpoint = "https://api.themoviedb.org/3/movie/\(movieId)/credits?api_key=\(API_KEY)&language=en-US";
+        
+        HTTPHandler.getJson(urlString: movieCastEndpoint) { [weak self] data in
+            guard let castJson = JSONParser.parse(data!)!["cast"] as? [[String: AnyObject]] else { return; }
+            
+            completionHandler(self?.createActorListFrom(json: castJson));
+        }
+    }
+    
+    private func createActorListFrom(json castJson: [[String: AnyObject]]) -> [Actor] {
+        var actorList: [Actor] = [];
+        for actorJson in castJson {
+            actorList.append(mapActor(actorJson))
+        }
+        
+        return actorList;
+    }
+    
+    private func mapActor(_ object: [String: AnyObject]) -> Actor {
+        let name = object["name"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
+        character = object["character"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
+        profileImagePath = object["profile_path"] as? String ?? DEFAULT_MOVIE_STRING_VALUE;
+        
+        return Actor(name: name, character: character, profileImagePath: profileImagePath);
+    }
 
     private func makeMovieRequest(with endpoint: String) {
         HTTPHandler.getJson(urlString: endpoint) { [weak self] data in

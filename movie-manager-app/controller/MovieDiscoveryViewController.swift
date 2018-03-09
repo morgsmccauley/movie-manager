@@ -152,6 +152,14 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
             getMovieDetails(movieIndex: (indexPath as NSIndexPath).row, destination);
             getMoviePoster(movieIndex: (indexPath as NSIndexPath).row, destination);
             getMovieBackdrop(movieIndex: (indexPath as NSIndexPath).row, destination);
+            getCast(movieIndex: (indexPath as NSIndexPath).row, destination);
+        }
+    }
+    
+    func getCast(movieIndex: Int, _ destination: MovieDetailViewController) {
+        let movie = movieResults[movieIndex];
+        movieManager.fetchCast(movieId: movie.id) { actors in
+            destination.cast = actors!;
         }
     }
     
@@ -166,6 +174,7 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
                     destination.poster.image = poster;
                 }
                 self?.movieResults[movieIndex].poster = poster;
+                //use cache, this causes the flicker due to triggering didset
             }
         }
     }
