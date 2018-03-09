@@ -287,15 +287,18 @@
 					24ED45BF1F0CAC56004D55CF = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = D43D668EH4;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					24ED45D61F0CAC56004D55CF = {
 						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 						TestTargetID = 24ED45BF1F0CAC56004D55CF;
 					};
 					24ED45E11F0CAC56004D55CF = {
 						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 						TestTargetID = 24ED45BF1F0CAC56004D55CF;
 					};
@@ -533,7 +536,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "project.movie-manager-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -549,7 +553,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "project.movie-manager-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -564,7 +569,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "project.movie-manager-appTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movie-manager-app.app/movie-manager-app";
 			};
 			name = Debug;
@@ -580,7 +586,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "project.movie-manager-appTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movie-manager-app.app/movie-manager-app";
 			};
 			name = Release;
@@ -595,7 +602,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "project.movie-manager-appUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = "movie-manager-app";
 			};
 			name = Debug;
@@ -610,7 +618,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "project.movie-manager-appUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = "movie-manager-app";
 			};
 			name = Release;
