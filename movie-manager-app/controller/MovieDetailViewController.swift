@@ -25,6 +25,7 @@ class MovieDetailViewController: UIViewController {
     }
     
     let movieManager = MovieManager();
+    var imageCache = NSCache<AnyObject, UIImage>();
     
     var cast: [Actor] = [] {
         didSet {
@@ -58,24 +59,23 @@ extension MovieDetailViewController: UICollectionViewDataSource {
         let actor = cast[(indexPath as NSIndexPath).row];
         
         cell.name.text = actor.name;
-        getProfileImage(actorIndex: (indexPath as NSIndexPath).row, cell);
+        getProfileImage(actor, cell);
         
         return cell;
     }
     
-    func getProfileImage(actorIndex: Int, _ cell: CastCollectionViewCell) {
-        let actor = cast[actorIndex];
-        if let profileImage = actor.profileImage {
+    func getProfileImage(_ actor: Actor, _ cell: CastCollectionViewCell) {
+        if let profileImage = imageCache.object(forKey: actor.profileImagePath as AnyObject) {
             cell.profileImage.image = profileImage;
-        } else {
-            movieManager.fetchImage(path: actor.profileImagePath) { [weak self] profileImage in
-                if let profileImage = profileImage {
-                    DispatchQueue.main.async {
-                        cell.profileImage.image = profileImage;
-                    }
-                    self?.cast[actorIndex].profileImage = profileImage;
-                    //this will trigger didset causing the view to reload / flickering
+            return;
+        }
+        
+        movieManager.fetchImage(path: actor.profileImagePath) { [weak self] profileImage in
+            if let profileImage = profileImage {
+                DispatchQueue.main.async {
+                    cell.profileImage.image = profileImage;
                 }
+                self?.imageCache.setObject(profileImage, forKey: actor.profileImagePath as AnyObject);
             }
         }
     }

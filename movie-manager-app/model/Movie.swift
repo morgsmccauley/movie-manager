@@ -24,9 +24,6 @@ struct Movie {
     var company: String = "";
     var runtime: String = "";
 
-    var poster: UIImage? = nil;
-    var backdrop: UIImage? = nil;
-
     init(id: Int, title: String, posterPath: String, backdropPath: String, releaseDate: String, overview: String, popularity: String) {
         self.id = id;
         self.title = title;

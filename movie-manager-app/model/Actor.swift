@@ -13,12 +13,4 @@ struct Actor {
     let name: String;
     let character: String;
     let profileImagePath: String;
-    
-    var profileImage: UIImage? = nil;
-
-    init(name: String, character: String, profileImagePath: String) {
-        self.name = name;
-        self.character = character;
-        self.profileImagePath = profileImagePath;
-    }
 }

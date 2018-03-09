@@ -32,6 +32,8 @@ class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
         }
     }
     
+    var imageCache = NSCache<AnyObject, UIImage>();
+    
     let movieManager = MovieManager();
     var movieResults: [Movie] = [] {
         didSet {
@@ -124,16 +126,16 @@ extension MovieDiscoveryViewController: UICollectionViewDataSource {
     }
     
     func getMoviePoster(movieIndex: Int, cell: MovieCollectionViewCell) {
-        if let poster = movieResults[movieIndex].poster {
+        let posterPath = movieResults[movieIndex].posterPath;
+        if let poster = imageCache.object(forKey: posterPath as AnyObject) {
             cell.moviePoster.image = poster;
             return;
         }
-
-        let posterPath = movieResults[movieIndex].posterPath;
+        
         movieManager.fetchImage(path: posterPath) { poster in
             DispatchQueue.main.async {
                 cell.moviePoster.image = poster;
-                self.movieResults[movieIndex].poster = poster;
+                self.imageCache.setObject(poster!, forKey: posterPath as AnyObject)
             }
         }
     }
@@ -149,54 +151,37 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
             let destination = segue.destination as? MovieDetailViewController,
             let _ = destination.view { //force view to load outlets
             
-            getMovieDetails(movieIndex: (indexPath as NSIndexPath).row, destination);
-            getMoviePoster(movieIndex: (indexPath as NSIndexPath).row, destination);
-            getMovieBackdrop(movieIndex: (indexPath as NSIndexPath).row, destination);
-            getCast(movieIndex: (indexPath as NSIndexPath).row, destination);
+            let movie = movieResults[(indexPath as NSIndexPath).row];
+            destination.poster.image = cell.moviePoster.image;
+            getMovieDetails(movie, destination);
+            getMovieBackdrop(movie, destination);
+            getCast(movie, destination);
         }
     }
     
-    func getCast(movieIndex: Int, _ destination: MovieDetailViewController) {
-        let movie = movieResults[movieIndex];
+    func getCast(_ movie: Movie, _ destination: MovieDetailViewController) {
         movieManager.fetchCast(movieId: movie.id) { actors in
             destination.cast = actors!;
         }
     }
     
-    func getMoviePoster(movieIndex: Int, _ destination: MovieDetailViewController) {
-        let movie = movieResults[movieIndex];
-        
-        if let poster = movie.poster {
-            destination.poster.image = poster;
-        } else {
-            movieManager.fetchImage(path: movie.posterPath) { [weak self] poster in
-                DispatchQueue.main.async {
-                    destination.poster.image = poster;
-                }
-                self?.movieResults[movieIndex].poster = poster;
-                //use cache, this causes the flicker due to triggering didset
-            }
-        }
-    }
-    
-    func getMovieBackdrop(movieIndex: Int, _ destination: MovieDetailViewController) {
-        let movie = movieResults[movieIndex];
-        
-        if let backdrop = movie.backdrop {
+    func getMovieBackdrop(_ movie: Movie, _ destination: MovieDetailViewController) {
+        let backdropPath = movie.backdropPath;
+        if let backdrop = imageCache.object(forKey: backdropPath as AnyObject) {
             destination.backdrop.image = backdrop;
-        } else {
-            movieManager.fetchImage(path: movie.backdropPath) { [weak self] backdrop in
-                DispatchQueue.main.async {
-                    destination.backdrop.image = backdrop;
-                }
-                self?.movieResults[movieIndex].backdrop = backdrop;
+            return;
+        }
+
+        movieManager.fetchImage(path: movie.backdropPath) { [weak self] backdrop in
+            DispatchQueue.main.async {
+                destination.backdrop.image = backdrop;
             }
+            self?.imageCache.setObject(backdrop!, forKey: backdropPath as AnyObject);
         }
     }
     
-    func getMovieDetails(movieIndex: Int, _ destination: MovieDetailViewController) {
-        //cache results
-        movieManager.appendMovieDetails(movie: movieResults[movieIndex]) { movieWithDetails in
+    func getMovieDetails(_ movie: Movie, _ destination: MovieDetailViewController) {
+        movieManager.appendMovieDetails(movie: movie) { movieWithDetails in
             DispatchQueue.main.async {
                 destination.movie = movieWithDetails!;
             }
