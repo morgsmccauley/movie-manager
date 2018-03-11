@@ -128,15 +128,17 @@ extension MovieDiscoveryViewController: UICollectionViewDataSource {
     func getMoviePoster(movieIndex: Int, cell: MovieCollectionViewCell) {
         let posterPath = movieResults[movieIndex].posterPath;
         if let poster = imageCache.object(forKey: posterPath as AnyObject) {
-            cell.moviePoster.image = poster;
+            DispatchQueue.main.async {
+                cell.moviePoster.image = poster;
+            }
             return;
         }
         
         movieManager.fetchImage(path: posterPath) { poster in
             DispatchQueue.main.async {
                 cell.moviePoster.image = poster;
-                self.imageCache.setObject(poster!, forKey: posterPath as AnyObject)
             }
+            self.imageCache.setObject(poster!, forKey: posterPath as AnyObject)
         }
     }
 }
