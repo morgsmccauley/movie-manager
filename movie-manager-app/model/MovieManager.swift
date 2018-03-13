@@ -82,9 +82,33 @@ class MovieManager {
         
         HTTPHandler.getJson(urlString: movieCastEndpoint) { [weak self] data in
             guard let castJson = JSONParser.parse(data!)!["cast"] as? [[String: AnyObject]] else { return; }
-            
             completionHandler(self?.createActorListFrom(json: castJson));
         }
+    }
+    
+    public func fetchReviews(movieId: Int, completionHandler: @escaping (([Review]?) -> ())) {
+        let movieReviewEndpoint = "https://api.themoviedb.org/3/movie/\(movieId)/reviews?api_key=\(API_KEY)&language=en-US&page=1";
+        
+        HTTPHandler.getJson(urlString: movieReviewEndpoint) { [weak self] data in
+            guard let reviewJson = JSONParser.parse(data!)!["results"] as? [[String: AnyObject]] else { return; }
+            completionHandler(self?.createReviewListFrom(json: reviewJson));
+        }
+    }
+    
+    private func createReviewListFrom(json reviewJson: [[String: AnyObject]]) -> [Review] {
+        var reviewList: [Review] = [];
+        for review in reviewJson {
+            reviewList.append(mapReview(review));
+        }
+        
+        return reviewList;
+    }
+    
+    private func mapReview(_ object: [String: AnyObject]) -> Review {
+        let author = object["author"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
+        content = object["content"] as? String ?? DEFAULT_MOVIE_STRING_VALUE;
+        
+        return Review(author: author, content: content);
     }
     
     private func createActorListFrom(json castJson: [[String: AnyObject]]) -> [Actor] {
@@ -130,9 +154,9 @@ class MovieManager {
         backdropPath = object["backdrop_path"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
         releaseDate = getYearFromFull(date: object["release_date"] as! String) ?? DEFAULT_MOVIE_STRING_VALUE,
         overview = object["overview"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
-        popularity = object["popularity"] as? String ?? DEFAULT_MOVIE_STRING_VALUE;
+        rating = "\(String(describing: object["vote_average"] as! NSNumber)) / 10";
         
-        return Movie(id: id, title: title, posterPath: posterPath, backdropPath: backdropPath, releaseDate: releaseDate, overview: overview, popularity: popularity);
+        return Movie(id: id, title: title, posterPath: posterPath, backdropPath: backdropPath, releaseDate: releaseDate, overview: overview, rating: rating);
     }
     
     private func getYearFromFull(date: String) -> String? {
@@ -144,7 +168,7 @@ class MovieManager {
         let genres = object["genres"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
         company = object["production_companies"] as? String ?? DEFAULT_MOVIE_STRING_VALUE, //these are lists
         budget = String(describing: object["budget"]!),
-        runtime = convertMinsToHourMinString(object["runtime"] as! Double);
+        runtime = convertMinsToHourMinString(object["runtime"] as? Double) ?? DEFAULT_MOVIE_STRING_VALUE;
         
         var movieWithDetails = movie;
         movieWithDetails.genres = genres;
@@ -155,7 +179,9 @@ class MovieManager {
         return movieWithDetails;
     }
     
-    private func convertMinsToHourMinString(_ runtime: Double) -> String {
+    private func convertMinsToHourMinString(_ runtime: Double?) -> String? {
+        guard let runtime = runtime else { return nil; }
+        
         let hours = floor(runtime / 60);
         let mins = runtime - (hours * 60);
         

@@ -35,12 +35,21 @@ class MovieDetailViewController: UIViewController {
         }
     }
     
+    var reviews: [Review] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.reviewTableView!.reloadData();
+            }
+        }
+    }
+    
     var movie: Movie! {
         didSet {
             self.name.text = movie.title;
             self.overview.text = movie.overview;
             self.releaseDate.text = movie.releaseDate;
             self.runtime.text = movie.runtime;
+            self.rating.text = movie.rating;
         }
     }
     
@@ -87,6 +96,28 @@ extension MovieDetailViewController: UICollectionViewDataSource {
     }
 }
 
+extension MovieDetailViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1;
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reviews.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let row = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as! ReviewTableViewCell;
+        let review = reviews[(indexPath as NSIndexPath).row];
+        
+        row.author.text = review.author;
+        row.content.text = review.content;
+        
+        return row;
+    }
+    
+    
+}
+
 extension UIImageView {
     func dropShadow(scale: Bool = true) {
         layer.masksToBounds = false
@@ -96,18 +127,6 @@ extension UIImageView {
         layer.shadowRadius = 1
         
         layer.shadowPath = UIBezierPath(rect: bounds).cgPath
-        layer.shouldRasterize = true
-        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
-    }
-    
-    func dropShadow(color: UIColor, opacity: Float = 0.5, offSet: CGSize, radius: CGFloat = 1, scale: Bool = true) {
-        layer.masksToBounds = false
-        layer.shadowColor = color.cgColor
-        layer.shadowOpacity = opacity
-        layer.shadowOffset = offSet
-        layer.shadowRadius = radius
-        
-        layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
         layer.shouldRasterize = true
         layer.rasterizationScale = scale ? UIScreen.main.scale : 1
     }

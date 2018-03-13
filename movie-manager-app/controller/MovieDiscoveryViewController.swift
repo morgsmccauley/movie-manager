@@ -158,6 +158,13 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
             getMovieDetails(movie, destination);
             getMovieBackdrop(movie, destination);
             getCast(movie, destination);
+            getReviews(movie, destination);
+        }
+    }
+    
+    func getReviews(_ movie: Movie, _ destination: MovieDetailViewController) {
+        movieManager.fetchReviews(movieId: movie.id) { reviews in
+            destination.reviews = reviews!;
         }
     }
     
@@ -182,6 +189,7 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
         }
     }
     
+    //assign movie first then append runtime later
     func getMovieDetails(_ movie: Movie, _ destination: MovieDetailViewController) {
         movieManager.appendMovieDetails(movie: movie) { movieWithDetails in
             DispatchQueue.main.async {
