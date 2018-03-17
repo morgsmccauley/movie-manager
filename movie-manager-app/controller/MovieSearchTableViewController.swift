@@ -18,7 +18,9 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
     var searchText: String = "" {
         didSet {
             if (!searchText.isEmpty) {
-                executeDelayedSearch(text: searchText);
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                    self?.executeSearch(text: self!.searchText);
+                }
             } else {
                 clearSearchResults();
             }
@@ -42,13 +44,10 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
         movieManager.delegate = self;
     }
     
-    func executeDelayedSearch(text: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let isLatestSearchText = self.searchText == text;
-            if (isLatestSearchText) {
-                print("executing search: " + self.searchText)
-                self.movieManager.fetchMoviesFor(query: self.searchText);
-            }
+    func executeSearch(text: String) {
+        let isLatestSearchText = self.searchText == text;
+        if (isLatestSearchText) {
+            self.movieManager.fetchMoviesFor(query: self.searchText);
         }
     }
 
@@ -70,7 +69,6 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
     
     func dismissKeyboard() {
         if (self.searchBar.isFirstResponder) {
-            print("dismiss keyboard");
             DispatchQueue.main.async {
                 self.searchBar.endEditing(true);
             }
@@ -91,22 +89,13 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as! MovieSearchTableViewCell;
+        let movie = searchResults[(indexPath as NSIndexPath).row];
 
-        let movieForRow = searchResults[(indexPath as NSIndexPath).row];
-
-        row.movieTitle?.text = movieForRow.title;
-        row.releaseDate?.text = movieForRow.releaseDate;
-
-        row.setUpView();
-
-        let backdropPath = movieForRow.backdropPath;
-        movieManager.fetchImage(path: backdropPath) { backdrop in
-            DispatchQueue.main.async {
-                if let backdrop = backdrop {
-                    row.backdrop.image = backdrop;
-                }
-            }
-        }
+        row.backdrop.image = nil;
+        
+        row.movieTitle?.text = movie.title;
+        row.releaseDate?.text = movie.releaseDate;
+        getBackdrop(movie, row);
 
         return row
     }
@@ -120,11 +109,23 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
             let _ = destination.view { //force view to load outlets
             
             let movie = searchResults[(indexPath as NSIndexPath).row];
-            getMovieBackdrop(movie, destination);
-            getMovieDetails(movie, destination);
+            destination.backdrop.image = row.backdrop.image;
+            destination.movie = movie;
+            getRuntime(movie, destination);
             getMoviePoster(movie, destination);
             getCast(movie, destination);
             getReviews(movie, destination);
+        }
+    }
+    
+    func getBackdrop(_ movie: Movie, _ row: MovieSearchTableViewCell) {
+        let backdropPath = movie.backdropPath;
+        movieManager.fetchImage(path: backdropPath) { backdrop in
+            DispatchQueue.main.async {
+                if let backdrop = backdrop {
+                    row.backdrop.image = backdrop;
+                }
+            }
         }
     }
     
@@ -140,14 +141,6 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
         }
     }
     
-    func getMovieBackdrop(_ movie: Movie, _ destination: MovieDetailViewController) {
-        movieManager.fetchImage(path: movie.backdropPath) { backdrop in
-            DispatchQueue.main.async {
-                destination.backdrop.image = backdrop;
-            }
-        }
-    }
-    
     func getMoviePoster(_ movie: Movie, _ destination: MovieDetailViewController) {
         movieManager.fetchImage(path: movie.posterPath) { poster in
             DispatchQueue.main.async {
@@ -156,11 +149,10 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
         }
     }
     
-    //assign movie first then append runtime later
-    func getMovieDetails(_ movie: Movie, _ destination: MovieDetailViewController) {
-        movieManager.appendMovieDetails(movie: movie) { movieWithDetails in
+    func getRuntime(_ movie: Movie, _ destination: MovieDetailViewController) {
+        movieManager.fetchRuntime(movie: movie) { runtime in
             DispatchQueue.main.async {
-                destination.movie = movieWithDetails!;
+                destination.runtime.text = runtime!;
             }
         }
     }

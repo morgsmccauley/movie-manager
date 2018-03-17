@@ -154,13 +154,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "movie-manager-app/controller/MovieDiscoveryViewController.swift"
-            timestampString = "542961818.438493"
+            timestampString = "542970484.225616"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
             endingLineNumber = "51"
             landmarkName = "MovieDiscoveryViewController"
             landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "movie_manager_app.MovieDiscoveryViewController.maxHeaderHeight.getter : CoreGraphics.CGFloat"
+                  moduleName = "movie-manager-app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/morganmccauley/Developer/movie-manager-app/movie-manager-app/controller/MovieDiscoveryViewController.swift"
+                  timestampString = "542969921.963434"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "99">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "movie_manager_app.MovieDiscoveryViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; movie_manager_app.MovieDiscoveryViewController"
+                  moduleName = "movie-manager-app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/morganmccauley/Developer/movie-manager-app/movie-manager-app/controller/MovieDiscoveryViewController.swift"
+                  timestampString = "542969921.965865"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "1739">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "movie_manager_app.MovieDiscoveryViewController.init(coder: __ObjC.NSCoder) -&gt; Swift.Optional&lt;movie_manager_app.MovieDiscoveryViewController&gt;"
+                  moduleName = "movie-manager-app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/morganmccauley/Developer/movie-manager-app/movie-manager-app/controller/MovieDiscoveryViewController.swift"
+                  timestampString = "542969921.967914"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "1637">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -13,8 +13,4 @@ class MovieSearchTableViewCell: UITableViewCell {
     @IBOutlet weak var backdrop: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var releaseDate: UILabel!
-    
-    func setUpView() {
-        backdrop.image = nil;
-    }
 }

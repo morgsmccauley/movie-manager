@@ -68,12 +68,13 @@ class MovieManager {
         }
     }
     
-    public func appendMovieDetails(movie: Movie, completionHandler: @escaping ((Movie?) -> ())) {
+    public func fetchRuntime(movie: Movie, completionHandler: @escaping ((String?) -> ())) {
         let movieDetailsEndpoint = "https://api.themoviedb.org/3/movie/\(movie.id)?api_key=\(API_KEY)&language=en-US";
         
         HTTPHandler.getJson(urlString: movieDetailsEndpoint) { [weak self] data in
-            let movieWithDetails = self?.mapMovieDetails(movie, JSONParser.parse(data!)!);
-            completionHandler(movieWithDetails);
+            let rawRuntime = JSONParser.parse(data!)!["runtime"];
+            let runtime = self?.convertMinsToHourMinString(rawRuntime as? Double) ?? DEFAULT_MOVIE_STRING_VALUE;
+            completionHandler(runtime);
         }
     }
     

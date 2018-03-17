@@ -155,7 +155,8 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
             
             let movie = movieResults[(indexPath as NSIndexPath).row];
             destination.poster.image = cell.moviePoster.image;
-            getMovieDetails(movie, destination);
+            destination.movie = movie;
+            getRuntime(movie, destination);
             getMovieBackdrop(movie, destination);
             getCast(movie, destination);
             getReviews(movie, destination);
@@ -189,11 +190,10 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
         }
     }
     
-    //assign movie first then append runtime later
-    func getMovieDetails(_ movie: Movie, _ destination: MovieDetailViewController) {
-        movieManager.appendMovieDetails(movie: movie) { movieWithDetails in
+    func getRuntime(_ movie: Movie, _ destination: MovieDetailViewController) {
+        movieManager.fetchRuntime(movie: movie) { runtime in
             DispatchQueue.main.async {
-                destination.movie = movieWithDetails!;
+                destination.runtime.text = runtime!;
             }
         }
     }
