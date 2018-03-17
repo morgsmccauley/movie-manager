@@ -110,4 +110,59 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
 
         return row
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "MovieDetailSegue" else { return; }
+        
+        if let row = sender as? MovieSearchTableViewCell,
+            let indexPath = self.tableView!.indexPath(for: row),
+            let destination = segue.destination as? MovieDetailViewController,
+            let _ = destination.view { //force view to load outlets
+            
+            let movie = searchResults[(indexPath as NSIndexPath).row];
+            getMovieBackdrop(movie, destination);
+            getMovieDetails(movie, destination);
+            getMoviePoster(movie, destination);
+            getCast(movie, destination);
+            getReviews(movie, destination);
+        }
+    }
+    
+    func getReviews(_ movie: Movie, _ destination: MovieDetailViewController) {
+        movieManager.fetchReviews(movieId: movie.id) { reviews in
+            destination.reviews = reviews!;
+        }
+    }
+    
+    func getCast(_ movie: Movie, _ destination: MovieDetailViewController) {
+        movieManager.fetchCast(movieId: movie.id) { actors in
+            destination.cast = actors!;
+        }
+    }
+    
+    func getMovieBackdrop(_ movie: Movie, _ destination: MovieDetailViewController) {
+        movieManager.fetchImage(path: movie.backdropPath) { backdrop in
+            DispatchQueue.main.async {
+                destination.backdrop.image = backdrop;
+            }
+        }
+    }
+    
+    func getMoviePoster(_ movie: Movie, _ destination: MovieDetailViewController) {
+        movieManager.fetchImage(path: movie.posterPath) { poster in
+            DispatchQueue.main.async {
+                destination.poster.image = poster;
+            }
+        }
+    }
+    
+    //assign movie first then append runtime later
+    func getMovieDetails(_ movie: Movie, _ destination: MovieDetailViewController) {
+        movieManager.appendMovieDetails(movie: movie) { movieWithDetails in
+            DispatchQueue.main.async {
+                destination.movie = movieWithDetails!;
+            }
+        }
+    }
+
 }

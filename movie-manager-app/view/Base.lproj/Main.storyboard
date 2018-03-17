@@ -196,7 +196,7 @@
         <scene sceneID="zjI-oy-PVM">
             <objects>
                 <tableViewController id="Pua-Lg-8bx" customClass="MovieSearchTableViewController" customModule="movie_manager_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="06D-xY-MHe">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="06D-xY-MHe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -210,7 +210,7 @@
                                 <rect key="frame" x="0.0" y="84" width="375" height="211"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cg0-O5-Pgu" id="XHn-Bt-erE">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="210.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="suicide-squad-backdrop" translatesAutoresizingMaskIntoConstraints="NO" id="Kex-Hp-4W7">
@@ -242,6 +242,7 @@
                                     <outlet property="backdrop" destination="Kex-Hp-4W7" id="rcO-KA-6VC"/>
                                     <outlet property="movieTitle" destination="p4x-4s-NRp" id="OOB-gt-9mc"/>
                                     <outlet property="releaseDate" destination="4hp-S8-Qt8" id="YSv-vb-xnF"/>
+                                    <segue destination="IlR-65-ONP" kind="show" identifier="MovieDetailSegue" id="gkv-F7-Un3"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -562,4 +563,7 @@
         <image name="suicide-squad-backdrop" width="500" height="281"/>
         <image name="suicide-squad-poster" width="500" height="750"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="gkv-F7-Un3"/>
+    </inferredMetricsTieBreakers>
 </document>
