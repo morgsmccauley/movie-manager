@@ -10,14 +10,11 @@ import UIKit
 
 class MovieSearchTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var moviePoster: UIImageView!
+    @IBOutlet weak var backdrop: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var releaseDate: UILabel!
-    @IBOutlet weak var popularity: UILabel!
-    @IBOutlet weak var genres: UILabel!
-    @IBOutlet weak var runtime: UILabel!
     
     func setUpView() {
-        moviePoster.image = nil;
+        backdrop.image = nil;
     }
 }

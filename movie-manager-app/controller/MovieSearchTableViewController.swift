@@ -8,12 +8,9 @@
 
 import UIKit
 
-private let SEARCH_VIEW_CELL_IDENTIFIER = "SearchResultCell";
-private let MAX_SEARCH_RESULTS = 5;
-private let DEFAULT_ROW_HEIGHT = CGFloat(170);
+private let DEFAULT_ROW_HEIGHT = CGFloat(211);
 
-//both these classes should inherit from a base class that does the integration with the model - will this work?
-class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate, MovieManagerDelegate {
+class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate, MovieManagerDelegate{
     @IBOutlet weak var searchBar: UISearchBar!;
 
     let movieManager = MovieManager();
@@ -30,11 +27,6 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
 
     var searchResults: [Movie] = [] {
         didSet {
-            if (searchResults.count > MAX_SEARCH_RESULTS) {
-                let resultsGreaterThanMaxRange = searchResults.startIndex.advanced(by: MAX_SEARCH_RESULTS)..<searchResults.endIndex;
-                searchResults.removeSubrange(resultsGreaterThanMaxRange);
-            }
-
             DispatchQueue.main.async {
                 self.tableView!.reloadData();
             }
@@ -44,14 +36,14 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.rowHeight = DEFAULT_ROW_HEIGHT; //why cant i set this statically in the view ?
+        self.tableView.rowHeight = DEFAULT_ROW_HEIGHT;
 
         searchBar.delegate = self;
         movieManager.delegate = self;
     }
     
     func executeDelayedSearch(text: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             let isLatestSearchText = self.searchText == text;
             if (isLatestSearchText) {
                 print("executing search: " + self.searchText)
@@ -71,6 +63,23 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchText = searchText;
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        dismissKeyboard();
+    }
+    
+    func dismissKeyboard() {
+        if (self.searchBar.isFirstResponder) {
+            print("dismiss keyboard");
+            DispatchQueue.main.async {
+                self.searchBar.endEditing(true);
+            }
+        }
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        dismissKeyboard();
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -81,29 +90,20 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = tableView.dequeueReusableCell(withIdentifier: SEARCH_VIEW_CELL_IDENTIFIER, for: indexPath) as! MovieSearchTableViewCell;
+        let row = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as! MovieSearchTableViewCell;
 
         let movieForRow = searchResults[(indexPath as NSIndexPath).row];
 
         row.movieTitle?.text = movieForRow.title;
         row.releaseDate?.text = movieForRow.releaseDate;
-        row.genres?.text = movieForRow.genres;
-        row.runtime?.text = movieForRow.runtime;
-//        row.popularity?.text = movieForRow.popularity;
 
         row.setUpView();
 
-        let posterPath = movieForRow.posterPath;
-        movieManager.fetchImage(path: posterPath) { returnedMoviePoster in
+        let backdropPath = movieForRow.backdropPath;
+        movieManager.fetchImage(path: backdropPath) { backdrop in
             DispatchQueue.main.async {
-
-                if let poster = returnedMoviePoster {
-                    row.moviePoster.image = poster;
-//                    cell.hasPoster = true;
-
-//                    self.movieResults[indexPath.row].poster = poster;
-                } else {
-//                    cell.hasPoster = false;
+                if let backdrop = backdrop {
+                    row.backdrop.image = backdrop;
                 }
             }
         }
