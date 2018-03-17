@@ -18,9 +18,7 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
     var searchText: String = "" {
         didSet {
             if (!searchText.isEmpty) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-                    self?.executeSearch(text: self!.searchText);
-                }
+                executeSearch(text: searchText);
             } else {
                 clearSearchResults();
             }
@@ -45,9 +43,11 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
     }
     
     func executeSearch(text: String) {
-        let isLatestSearchText = self.searchText == text;
-        if (isLatestSearchText) {
-            self.movieManager.fetchMoviesFor(query: self.searchText);
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            let isLatestSearchText = self?.searchText == text;
+            if (isLatestSearchText) {
+                self?.movieManager.fetchMoviesFor(query: self!.searchText);
+            }
         }
     }
 
@@ -64,6 +64,17 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        dismissKeyboard();
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true;
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = "";
+        searchBar.showsCancelButton = false;
+        clearSearchResults();
         dismissKeyboard();
     }
     
