@@ -179,7 +179,9 @@
                             <constraint firstAttribute="trailing" secondItem="Xk1-aR-Rp1" secondAttribute="trailing" id="zLZ-Vu-O2T"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Discover" image="discover" selectedImage="discover" id="gFr-RI-dJf"/>
+                    <tabBarItem key="tabBarItem" title="Discover" image="discover" selectedImage="discover" id="gFr-RI-dJf">
+                        <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="collectionView" destination="C25-D7-GqH" id="eo3-BW-gao"/>
                         <outlet property="flowLayout" destination="fwf-U4-Ay2" id="w6w-gb-UfA"/>
@@ -289,7 +291,7 @@
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UI-xc-sG1" userLabel="Close">
                                                 <rect key="frame" x="25" y="20" width="20" height="20"/>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" image="close">
                                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -443,11 +445,19 @@
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bc3-GB-Mf5" userLabel="Play">
                                                 <rect key="frame" x="175" y="93" width="20" height="22"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="Play"/>
+                                                <connections>
+                                                    <action selector="playTrailer:" destination="IlR-65-ONP" eventType="touchUpInside" id="Rwb-1i-yOf"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQQ-ax-5f1" userLabel="Favourite">
                                                 <rect key="frame" x="330" y="20" width="20" height="22"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="Heart"/>
+                                                <connections>
+                                                    <action selector="favouriteThisMovieButton:" destination="IlR-65-ONP" eventType="touchUpInside" id="PkX-TZ-9IN"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -515,6 +525,7 @@
                     <connections>
                         <outlet property="backdrop" destination="0PO-yg-zyi" id="QqM-yO-HKk"/>
                         <outlet property="castCollectionView" destination="uL6-lw-CMi" id="WTt-XI-Oqp"/>
+                        <outlet property="favouriteMovieButton" destination="MQQ-ax-5f1" id="hMG-c3-1gn"/>
                         <outlet property="name" destination="Krt-SG-dHm" id="hQE-y7-kfV"/>
                         <outlet property="overview" destination="MBd-Ca-3T9" id="XlS-2S-h0g"/>
                         <outlet property="poster" destination="2SE-Qp-jKr" id="Qzj-u5-JYE"/>
@@ -537,6 +548,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="Pua-Lg-8bx" kind="relationship" relationship="viewControllers" id="nxM-0V-yKu"/>

@@ -165,21 +165,6 @@ class MovieManager {
         return String(date[...date.index(before: dashIndex)]);
     }
     
-    private func mapMovieDetails(_ movie: Movie, _ object: [String: AnyObject]) -> Movie {
-        let genres = object["genres"] as? String ?? DEFAULT_MOVIE_STRING_VALUE,
-        company = object["production_companies"] as? String ?? DEFAULT_MOVIE_STRING_VALUE, //these are lists
-        budget = String(describing: object["budget"]!),
-        runtime = convertMinsToHourMinString(object["runtime"] as? Double) ?? DEFAULT_MOVIE_STRING_VALUE;
-        
-        var movieWithDetails = movie;
-        movieWithDetails.genres = genres;
-        movieWithDetails.company = company;
-        movieWithDetails.budget = budget;
-        movieWithDetails.runtime = runtime;
-        
-        return movieWithDetails;
-    }
-    
     private func convertMinsToHourMinString(_ runtime: Double?) -> String? {
         guard let runtime = runtime else { return nil; }
         

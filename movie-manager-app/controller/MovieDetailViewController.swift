@@ -6,7 +6,7 @@
 //  Copyright © 2017 Morgan McCauley. All rights reserved.
 //
 
-import UIKit
+import UIKit;
 
 class MovieDetailViewController: UIViewController {
   
@@ -16,15 +16,34 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var overview: UILabel!
     @IBOutlet weak var releaseDate: UILabel!
-    @IBOutlet weak var runtime: UILabel!
+    @IBOutlet weak var runtime: UILabel! {
+        didSet {
+//            movie.runtime = self.runtime.text ?? "";
+        }
+    }
     @IBOutlet weak var castCollectionView: UICollectionView!
     @IBOutlet weak var reviewTableView: UITableView!
+    @IBOutlet weak var favouriteMovieButton: UIButton!
     
     @IBAction func closeViewController(_ sender: Any) {
         self.dismiss(animated: true, completion: nil);
     }
+    @IBAction func favouriteThisMovieButton(_ sender: Any) {
+        animateFavouriteButtonTap();
+        if (movieIsFavourited()) {
+            toggleFavouriteButtonState(favourited: false);
+            favouriteMovieManager.remove(movieId: movie.id);
+        } else {
+            toggleFavouriteButtonState(favourited: true);
+            favouriteMovieManager.save(movie: self.movie);
+        }
+    }
+    @IBAction func playTrailer(_ sender: Any) {
+        
+    }
     
     let movieManager = MovieManager();
+    let favouriteMovieManager = FavourtieMovieManager();
     var imageCache = NSCache<AnyObject, UIImage>();
     
     var cast: [Actor] = [] {
@@ -48,8 +67,11 @@ class MovieDetailViewController: UIViewController {
             self.name.text = movie.title;
             self.overview.text = movie.overview;
             self.releaseDate.text = movie.releaseDate;
-            self.runtime.text = movie.runtime;
             self.rating.text = movie.rating;
+            
+            if (favouriteMovieManager.isSaved(movieId: movie.id)) {
+                toggleFavouriteButtonState(favourited: true);
+            }
         }
     }
     
@@ -57,6 +79,26 @@ class MovieDetailViewController: UIViewController {
         super.viewDidLoad();
         
         poster.dropShadow();
+    }
+    
+    func movieIsFavourited() -> Bool {
+        return self.favouriteMovieButton.tintColor == UIColor.red;
+    }
+    
+    func toggleFavouriteButtonState(favourited: Bool) {
+        let buttonColour = favourited ? UIColor.red : UIColor.white;
+        self.favouriteMovieButton.tintColor = buttonColour;
+    }
+    
+    func animateFavouriteButtonTap() {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.65, initialSpringVelocity: 0, options: [], animations: {
+            self.favouriteMovieButton.transform = CGAffineTransform(scaleX: 1.6, y: 1.6);
+        }) { (hasFinished) in
+            guard hasFinished else { return; }
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.65, initialSpringVelocity: 0, options: [], animations: {
+                self.favouriteMovieButton.transform = .identity;
+            });
+        }
     }
 }
 
@@ -114,8 +156,6 @@ extension MovieDetailViewController: UITableViewDataSource {
         
         return row;
     }
-    
-    
 }
 
 extension UIImageView {

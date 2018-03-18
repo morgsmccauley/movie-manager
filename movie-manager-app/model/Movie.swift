@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 struct Movie {
- 
     let id: Int;
     let title: String;
     let posterPath: String;
@@ -19,9 +18,6 @@ struct Movie {
     let overview: String;
     let rating: String;
 
-    var genres: String = "";
-    var budget: String = "";
-    var company: String = "";
     var runtime: String = "";
 
     init(id: Int, title: String, posterPath: String, backdropPath: String, releaseDate: String, overview: String, rating: String) {
@@ -32,5 +28,10 @@ struct Movie {
         self.releaseDate = releaseDate;
         self.overview = overview;
         self.rating = rating;
+    }
+    
+    init(id: Int, title: String, posterPath: String, backdropPath: String, releaseDate: String, overview: String, rating: String, runtime: String) {
+        self.init(id: id, title: title, posterPath: posterPath, backdropPath: backdropPath, releaseDate: releaseDate, overview: overview, rating: rating);
+        self.runtime = runtime;
     }
 }
