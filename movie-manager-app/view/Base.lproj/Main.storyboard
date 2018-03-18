@@ -579,10 +579,10 @@
             </objects>
             <point key="canvasLocation" x="3064.8000000000002" y="329.2353823088456"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Movie Tab Bar Controller-->
         <scene sceneID="hTP-az-8ln">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ZGv-xC-1pq" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="ZGv-xC-1pq" customClass="MovieTabBarController" customModule="movie_manager_app" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="20I-XS-ZKh">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -590,6 +590,14 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="selectedImageTintColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="defaultIndex">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="Pua-Lg-8bx" kind="relationship" relationship="viewControllers" id="nxM-0V-yKu"/>
                         <segue destination="Ykc-gJ-ipT" kind="relationship" relationship="viewControllers" id="VMO-qe-gcb"/>

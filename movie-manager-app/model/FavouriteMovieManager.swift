@@ -34,7 +34,7 @@ class FavourtieMovieManager {
     public func remove(movieId: Int) {
         for object in fetchMoviesFromContext() {
             if object.value(forKey: "id") as! Int == movieId {
-                print("removed \(object.value(forKey: "title"))");
+                print("removed \(object.value(forKey: "title")!)");
                 context.delete(object)
             }
         }

@@ -18,6 +18,7 @@
 		246B8DD12051C863004EA76F /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 246B8DCE2051C861004EA76F /* Raleway-Thin.ttf */; };
 		246B8DD22051C863004EA76F /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 246B8DCF2051C862004EA76F /* Raleway-Medium.ttf */; };
 		246B8DD32051C863004EA76F /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 246B8DD02051C862004EA76F /* Raleway-Bold.ttf */; };
+		247E7450205E2E2B00915DA2 /* MovieTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247E744F205E2E2B00915DA2 /* MovieTabBarController.swift */; };
 		248B0805204E4808004B6725 /* MovieDiscoveryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248B0804204E4808004B6725 /* MovieDiscoveryHeaderView.swift */; };
 		2491AF9C2052578100C04A17 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2491AF9B2052578100C04A17 /* Actor.swift */; };
 		2491AF9E20525B9200C04A17 /* CastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2491AF9D20525B9200C04A17 /* CastCollectionViewCell.swift */; };
@@ -64,6 +65,7 @@
 		246B8DCE2051C861004EA76F /* Raleway-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Thin.ttf"; sourceTree = "<group>"; };
 		246B8DCF2051C862004EA76F /* Raleway-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Medium.ttf"; sourceTree = "<group>"; };
 		246B8DD02051C862004EA76F /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Bold.ttf"; sourceTree = "<group>"; };
+		247E744F205E2E2B00915DA2 /* MovieTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieTabBarController.swift; path = "movie-manager-app/controller/MovieTabBarController.swift"; sourceTree = "<group>"; };
 		248B0804204E4808004B6725 /* MovieDiscoveryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDiscoveryHeaderView.swift; sourceTree = "<group>"; };
 		2491AF9B2052578100C04A17 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		2491AF9D20525B9200C04A17 /* CastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 		24ED45B71F0CAC56004D55CF = {
 			isa = PBXGroup;
 			children = (
+				247E744F205E2E2B00915DA2 /* MovieTabBarController.swift */,
 				2491AF9A2051C88700C04A17 /* fonts */,
 				24ED45C21F0CAC56004D55CF /* movie-manager-app */,
 				24ED45DA1F0CAC56004D55CF /* movie-manager-appTests */,
@@ -371,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				247E7450205E2E2B00915DA2 /* MovieTabBarController.swift in Sources */,
 				2412A6981F80D9EB00B2E81D /* MovieSearchTableViewController.swift in Sources */,
 				2491AF9E20525B9200C04A17 /* CastCollectionViewCell.swift in Sources */,
 				24541BCC205D166600737483 /* FavouriteMovieManager.swift in Sources */,
