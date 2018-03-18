@@ -8,8 +8,7 @@
 
 import UIKit
 
-class MovieSearchTableViewCell: UITableViewCell {
-
+class MovieTableViewCell: UITableViewCell {
     @IBOutlet weak var backdrop: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var releaseDate: UILabel!

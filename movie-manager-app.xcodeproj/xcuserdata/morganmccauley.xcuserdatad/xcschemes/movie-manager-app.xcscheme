@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "24ED45BF1F0CAC56004D55CF"
-               BuildableName = "movie-manager-app.app"
+               BuildableName = "movie-manager-app"
                BlueprintName = "movie-manager-app"
                ReferencedContainer = "container:movie-manager-app.xcodeproj">
             </BuildableReference>
@@ -78,7 +78,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "24ED45BF1F0CAC56004D55CF"
-            BuildableName = "movie-manager-app.app"
+            BuildableName = "movie-manager-app"
             BlueprintName = "movie-manager-app"
             ReferencedContainer = "container:movie-manager-app.xcodeproj">
          </BuildableReference>

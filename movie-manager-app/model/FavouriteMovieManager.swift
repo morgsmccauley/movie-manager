@@ -22,31 +22,20 @@ class FavourtieMovieManager {
     }
     
     public func isSaved(movieId: Int) -> Bool {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieEntity");
-        request.returnsObjectsAsFaults = false;
-        
-        if let result = try? context.fetch(request) {
-            for object in result as! [NSManagedObject] {
-                if object.value(forKey: "id") as! Int == movieId {
-                    return true;
-                }
+        for object in fetchMoviesFromContext() {
+            if object.value(forKey: "id") as! Int == movieId {
+                return true;
             }
         }
-        
+
         return false;
     }
     
-    //add private func to iterate over context, pass condition to match and function to execute if successful
     public func remove(movieId: Int) {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieEntity");
-        request.returnsObjectsAsFaults = false;
-        
-        if let result = try? context.fetch(request) {
-            for object in result as! [NSManagedObject] {
-                if object.value(forKey: "id") as! Int == movieId {
-                    print("removed \(object.value(forKey: "title")!)");
-                    context.delete(object)
-                }
+        for object in fetchMoviesFromContext() {
+            if object.value(forKey: "id") as! Int == movieId {
+                print("removed \(object.value(forKey: "title"))");
+                context.delete(object)
             }
         }
     }
@@ -72,21 +61,27 @@ class FavourtieMovieManager {
     }
     
     public func fetchSaved() -> [Movie] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieEntity");
-        request.returnsObjectsAsFaults = false;
-
         var savedMovies: [Movie] = [];
-        do {
-            let result = try context.fetch(request)
-            for data in result as! [NSManagedObject] {
-                savedMovies.append(entityToMovie(data));
-            }
-        } catch {
-            print("Failed to fetch favourite movies")
-            return [];
+        for object in fetchMoviesFromContext() {
+            savedMovies.append(entityToMovie(object));
         }
         
+        print("saved movies: \(savedMovies)");
         return savedMovies;
+    }
+    
+    private func fetchMoviesFromContext() -> [NSManagedObject] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieEntity");
+        request.returnsObjectsAsFaults = false;
+        
+        do {
+            let result = try context.fetch(request) as! [NSManagedObject];
+            return result;
+        } catch {
+            print("Failed to retrieve from context");
+        }
+        
+        return [];
     }
     
     private func entityToMovie(_ data: NSManagedObject) -> Movie {

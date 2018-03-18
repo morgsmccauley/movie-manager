@@ -1,31 +1,21 @@
 //
-//  MovieSearchTableViewController.swift
+//  FavouriteMoviesTableViewController.swift
 //  movie-manager-app
 //
-//  Created by Morgan McCauley on 1/10/17.
-//  Copyright © 2017 Morgan McCauley. All rights reserved.
+//  Created by Morgan McCauley on 18/03/18.
+//  Copyright © 2018 Morgan McCauley. All rights reserved.
 //
 
 import UIKit
 
 private let DEFAULT_ROW_HEIGHT = CGFloat(211);
 
-class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate, MovieManagerDelegate{
-    @IBOutlet weak var searchBar: UISearchBar!;
-
+class FavouriteMoviesTableViewController: UITableViewController {
+    
     let movieManager = MovieManager();
-
-    var searchText: String = "" {
-        didSet {
-            if (!searchText.isEmpty) {
-                executeSearch(text: searchText);
-            } else {
-                clearSearchResults();
-            }
-        }
-    }
-
-    var searchResults: [Movie] = [] {
+    let favouriteMovieManager = FavourtieMovieManager();
+    
+    var favouriteMovies: [Movie] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.tableView!.reloadData();
@@ -35,79 +25,32 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.tableView.rowHeight = DEFAULT_ROW_HEIGHT;
-
-        searchBar.delegate = self;
-        movieManager.delegate = self;
     }
     
-    func executeSearch(text: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            let isLatestSearchText = self?.searchText == text;
-            if (isLatestSearchText) {
-                self?.movieManager.fetchMoviesFor(query: self!.searchText);
-            }
-        }
-    }
-
-    func movieFetchComplete(movies: [Movie]) {
-        searchResults = movies;
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        favouriteMovies = favouriteMovieManager.fetchSaved();
     }
     
-    func clearSearchResults() {
-        searchResults = [];
-    }
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.searchText = searchText;
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        dismissKeyboard();
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = true;
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = "";
-        searchBar.showsCancelButton = false;
-        clearSearchResults();
-        dismissKeyboard();
-    }
-    
-    func dismissKeyboard() {
-        if (self.searchBar.isFirstResponder) {
-            DispatchQueue.main.async {
-                self.searchBar.endEditing(true);
-            }
-        }
-    }
-    
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        dismissKeyboard();
-    }
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 1;
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count;
+        return favouriteMovies.count;
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as! MovieTableViewCell;
-        let movie = searchResults[(indexPath as NSIndexPath).row];
-
+        let row = tableView.dequeueReusableCell(withIdentifier: "FavouriteMovieCell", for: indexPath) as! MovieTableViewCell;
+        let movie = favouriteMovies[(indexPath as NSIndexPath).row];
+        
         row.backdrop.image = nil;
         
         row.movieTitle?.text = movie.title;
         row.releaseDate?.text = movie.releaseDate;
         getBackdrop(movie, row);
-
+        
         return row
     }
     
@@ -119,9 +62,10 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
             let destination = segue.destination as? MovieDetailViewController,
             let _ = destination.view { //force view to load outlets
             
-            let movie = searchResults[(indexPath as NSIndexPath).row];
-            destination.backdrop.image = row.backdrop.image;
+            let movie = favouriteMovies[(indexPath as NSIndexPath).row];
             destination.movie = movie;
+            getBackdrop(movie, destination);
+            getMoviePoster(movie, destination);
             getRuntime(movie, destination);
             getMoviePoster(movie, destination);
             getCast(movie, destination);
@@ -135,6 +79,17 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
             DispatchQueue.main.async {
                 if let backdrop = backdrop {
                     row.backdrop.image = backdrop;
+                }
+            }
+        }
+    }
+    
+    func getBackdrop(_ movie: Movie, _ destination: MovieDetailViewController) {
+        let backdropPath = movie.backdropPath;
+        movieManager.fetchImage(path: backdropPath) { backdrop in
+            DispatchQueue.main.async {
+                if let backdrop = backdrop {
+                    destination.backdrop.image = backdrop;
                 }
             }
         }
