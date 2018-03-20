@@ -10,7 +10,7 @@ import UIKit
 
 private let DEFAULT_ROW_HEIGHT = CGFloat(211);
 
-class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate, MovieManagerDelegate{
+class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate, MovieViewControllerProtocol, MovieManagerDelegate{
     @IBOutlet weak var searchBar: UISearchBar!;
 
     let movieManager = MovieManager();
@@ -106,7 +106,7 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
         
         row.movieTitle?.text = movie.title;
         row.releaseDate?.text = movie.releaseDate;
-        getBackdrop(movie, row);
+        self.getBackdrop(for: movie, passTo: row);
 
         return row
     }
@@ -122,49 +122,10 @@ class MovieSearchTableViewController: UITableViewController, UISearchBarDelegate
             let movie = searchResults[(indexPath as NSIndexPath).row];
             destination.backdrop.image = row.backdrop.image;
             destination.movie = movie;
-            getRuntime(movie, destination);
-            getMoviePoster(movie, destination);
-            getCast(movie, destination);
-            getReviews(movie, destination);
-        }
-    }
-    
-    func getBackdrop(_ movie: Movie, _ row: MovieTableViewCell) {
-        let backdropPath = movie.backdropPath;
-        movieManager.fetchImage(path: backdropPath) { backdrop in
-            DispatchQueue.main.async {
-                if let backdrop = backdrop {
-                    row.backdrop.image = backdrop;
-                }
-            }
-        }
-    }
-    
-    func getReviews(_ movie: Movie, _ destination: MovieDetailViewController) {
-        movieManager.fetchReviews(movieId: movie.id) { reviews in
-            destination.reviews = reviews!;
-        }
-    }
-    
-    func getCast(_ movie: Movie, _ destination: MovieDetailViewController) {
-        movieManager.fetchCast(movieId: movie.id) { actors in
-            destination.cast = actors!;
-        }
-    }
-    
-    func getMoviePoster(_ movie: Movie, _ destination: MovieDetailViewController) {
-        movieManager.fetchImage(path: movie.posterPath) { poster in
-            DispatchQueue.main.async {
-                destination.poster.image = poster;
-            }
-        }
-    }
-    
-    func getRuntime(_ movie: Movie, _ destination: MovieDetailViewController) {
-        movieManager.fetchRuntime(movie: movie) { runtime in
-            DispatchQueue.main.async {
-                destination.runtime.text = runtime!;
-            }
+            self.getRuntime(for: movie, passTo: destination);
+            self.getPoster(for: movie, passTo: destination);
+            self.getCast(for: movie, passTo: destination);
+            self.getReviews(for: movie, passTo: destination);
         }
     }
 }

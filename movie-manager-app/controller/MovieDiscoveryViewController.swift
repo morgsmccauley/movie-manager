@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDiscoveryViewController: UIViewController, MovieManagerDelegate {
+class MovieDiscoveryViewController: UIViewController, MovieViewControllerProtocol, MovieManagerDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!;
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!;
@@ -156,45 +156,10 @@ extension MovieDiscoveryViewController: UICollectionViewDelegate {
             let movie = movieResults[(indexPath as NSIndexPath).row];
             destination.poster.image = cell.moviePoster.image;
             destination.movie = movie;
-            getRuntime(movie, destination);
-            getMovieBackdrop(movie, destination);
-            getCast(movie, destination);
-            getReviews(movie, destination);
-        }
-    }
-    
-    func getReviews(_ movie: Movie, _ destination: MovieDetailViewController) {
-        movieManager.fetchReviews(movieId: movie.id) { reviews in
-            destination.reviews = reviews!;
-        }
-    }
-    
-    func getCast(_ movie: Movie, _ destination: MovieDetailViewController) {
-        movieManager.fetchCast(movieId: movie.id) { actors in
-            destination.cast = actors!;
-        }
-    }
-    
-    func getMovieBackdrop(_ movie: Movie, _ destination: MovieDetailViewController) {
-        let backdropPath = movie.backdropPath;
-        if let backdrop = imageCache.object(forKey: backdropPath as AnyObject) {
-            destination.backdrop.image = backdrop;
-            return;
-        }
-
-        movieManager.fetchImage(path: movie.backdropPath) { [weak self] backdrop in
-            DispatchQueue.main.async {
-                destination.backdrop.image = backdrop;
-            }
-            self?.imageCache.setObject(backdrop!, forKey: backdropPath as AnyObject);
-        }
-    }
-    
-    func getRuntime(_ movie: Movie, _ destination: MovieDetailViewController) {
-        movieManager.fetchRuntime(movie: movie) { runtime in
-            DispatchQueue.main.async {
-                destination.runtime.text = runtime!;
-            }
+            self.getRuntime(for: movie, passTo: destination);
+            self.getBackdrop(for: movie, passTo: destination);
+            self.getCast(for: movie, passTo: destination);
+            self.getReviews(for: movie, passTo: destination);
         }
     }
     

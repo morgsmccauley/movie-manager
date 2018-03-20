@@ -3,7 +3,7 @@
 ### TO DO:
 
 - [ ] Youtube integration - play trailer
-- [ ] Move detail data fetch/transer functions in to separate class (code repeated in all three controllers)
+- [X] Move detail data fetch/transer functions in to separate class (code repeated in all three controllers)
 - [ ] Hide detail sections if no data present
 - [ ] App icon and launch screen
 - [ ] Add more appropriate default values / images
